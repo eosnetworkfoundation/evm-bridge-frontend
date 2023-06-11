@@ -1,0 +1,84 @@
+#+TITLE: EVM Bridge Rework
+#+DATE: <2023-06-05 Mon>
+#+STARTUP: inlineimages
+
+* Admininstration
+#+NAME: github-repo-owner
+#+BEGIN_SRC elisp :cache yes
+  "eosnetworkfoundation"
+#+END_SRC
+
+#+RESULTS[1fec5217a12a490ec14bb0010770609ad0740732]: github-repo-owner
+: eosnetworkfoundation
+
+#+NAME: github-repo-name
+#+BEGIN_SRC elisp :cache yes
+  "frontend-engineering"
+#+END_SRC
+
+#+RESULTS[a02dee89949b8d3ce89ce69e72df9b912125da9e]: github-repo-name
+: frontend-engineering
+
+#+NAME: github-access-token
+#+BEGIN_SRC elisp :cache yes
+  (with-temp-buffer
+    (insert-file-contents "./classic-token.txt")
+    (s-trim (buffer-string)))
+#+END_SRC
+
+#+RESULTS[c1acbb6ee50477f8c02baecfa39dbdb838192c6b]: github-access-token
+: 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
+
+#+NAME: get-repo-issues
+#+BEGIN_SRC http :noweb yes :results value code :pretty
+  GET https://api.github.com/repos/<<github-repo-owner()>>/<<github-repo-name()>>/issues
+  Content-Type: application/json
+  Accept: application/vnd.github+json
+  X-GitHub-Api-Version: 2022-11-28
+  Authorization: Bearer <<github-access-token()>>
+#+END_SRC
+
+#+NAME: issues
+#+BEGIN_SRC elisp :cache yes
+(json-encode '(("issues" . ((("title" . "Test Issue") ("body" . "I'm having a problem with this.") ("milestone" . 4))))))
+#+END_SRC
+
+#+RESULTS[692460ff1f0d436fec1b3aaae0f6b827f74c449c]: issues
+: {"issues":[{"title":"Test Issue","body":"I'm having a problem with this.","milestone":4}]}
+
+#+NAME: create-repo-issues
+#+BEGIN_SRC http :noweb yes
+  POST https://api.github.com/repos/<<github-repo-owner()>>/<<github-repo-name()>>/issues
+  Accept: application/vnd.github+json
+  X-GitHub-Api-Version: 2022-11-28
+  Authorization: Bearer <<github-access-token()>>
+
+  <<issues()>>
+#+END_SRC
+
+* Screenshots
+** Withdraw Tab
+[[./withdraw-screen.png]]
+** Deposit Tab
+[[./deposit-screen.png]]
+* Issues
+:PROPERTIES:
+:TABLE_EXPORT_FILE: ~/Desktop/issues.json
+:TABLE_EXPORT_FORMAT: ox-json-export
+:END:
+
+| title                                      | body                                                                                                                                         | milestone | labels        |
+| Svelte(Kit) Hello World                    | Display a minimally functional component using SvelteKit (or Svelte) and Vite                                                                |         4 |               |
+| Add Tailwind CSS                           | Add Tailwind CSS with the recommended method                                                                                                 |         4 |               |
+| Create network switcher component          | This should be a dropdown and have a "Connect Wallet" button; make sure "Connect Wallet" can be styled and "Switch Network" can be hidden    |         4 |               |
+| Create header component                    | This should have the logo on the lefthand side                                                                                               |         4 |               |
+| Create social presence component           | This should have Twitter, Discord, Telegram, and YouTube icons                                                                               |         4 |               |
+| Create footer component                    | This should have another logo in the bottom-left and an About section on the bottom-right; add copyright line to bottom                      |         4 | "second look" |
+| Create tab switcher                        | This should be a state change on some enum                                                                                                   |         4 |               |
+| Create transfer button                     | This should have a big transfer button that can be toggled based on the tab; add bottom text for gas fee estimates                           |         4 |               |
+| Create From and To boxes                   | Two boxes with From and To on the left-hand side (10% relative width); add some text inputs for spacing; styling not important at the moment |         4 | "second look" |
+| Implement Address and Amount inputs        | Two inputs, the top one is disabled and just fills in with the connected wallet address; the bottom one is a number input                    |         4 |               |
+| Create conversion textfield for To box     | Two inputs, the top one lets you add an EOS username and shows the address beneath it; the bottom one is free text                           |         4 | "second look" |
+| Create copyable textfield for deposit side | Two disabled inputs, the top one is hardcoded to `eosio.evm` and the bottom is based on the connected wallet.                                |         4 |               |
+| Add a disconnect button                    | You should be able to disconnect your wallet                                                                                                 |         4 | "enhancement" |
+| Add Cypress tests                          | We should add Cypress tests to both ensure we're at parity and can easily refactor the next time we have to refactor                         |         4 | "enhancement" |

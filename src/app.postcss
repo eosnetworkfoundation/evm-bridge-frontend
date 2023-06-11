@@ -1,0 +1,42 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+$primary: #1E94E6;
+$success: #8EE4A2;
+$link-decoration: none;pppp
+*/
+
+@font-face {
+    font-family: 'sfmoma';
+    src: url('/sfmomadisplayregular.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'sfmoma';
+    src: url('/sfmomadisplay.ttf');
+    font-weight: 700;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: #000;
+    font-family: 'sfmoma', sans-serif;
+    
+    > .main {
+        flex: 1;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+h1, p, span { color: #fff; }
