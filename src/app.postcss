@@ -6,7 +6,7 @@
 /*
 $primary: #1E94E6;
 $success: #8EE4A2;
-$link-decoration: none;pppp
+$link-decoration: none;
 */
 
 @font-face {
@@ -39,4 +39,12 @@ $link-decoration: none;pppp
     }
 }
 
-h1, p, span { color: #fff; }
+@layer base {
+    input[type='number']::-webkit-outer-spin-button,
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number'] {
+        -webkit-appearance: none;
+        margin: 0;
+        -moz-appearance: textfield !important;
+    }
+}

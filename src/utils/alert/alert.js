@@ -1,5 +1,3 @@
-import './alert.scss'
-
 const alertTypes = {
   show: {
     type: 'dark',
