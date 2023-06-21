@@ -25,6 +25,8 @@ const messages = {
     'home.transferTime': 'Time to transfer: {0}',
     'home.exchangeTime': 'Time to exchange: {0}',
     'home.lastTransaction': 'Last transaction:',
+    'home.hash.evm': 'EOS-EVM Hash:',
+    'home.hash.native': 'EOS Native Hash:',
     'home.copy': 'Copy',
     'home.addrCopied' : 'Address copied',
     'home.bridgeFee': 'Bridge Fee:',

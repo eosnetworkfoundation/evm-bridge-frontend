@@ -103,8 +103,9 @@
           </div>
 
           <div class="transaction-hash" v-if="transactionHash">
-            {{$t('home.lastTransaction')}}
-            {{ transactionHash }}
+              <span>{{$t('home.lastTransaction')}}</span>
+              <span>{{$t('home.hash.evm')}} {{ transactionHash }}</span>
+              <span>{{$t('home.hash.native')}} {{ nativeTransactionHash }}</span>
           </div>
           <div class="error" v-if="transactionError">{{ transactionError }}</div>
         </div>
@@ -198,22 +199,23 @@ export default {
   inject: ['wallet', 'env'],
   data() {
     return {
-      address: '',
-      balance: '',
-      memo: '',
-      amount: '',
-      targetAddress: '',
-      gas: '',
-      gasPrice: '',
-      transactionHash: '',
-      tab: '',
-      submitting: false,
-      finished: false,
-      transactionError: '',
-      extraWarning: ''
+        address: '',
+        balance: '',
+        memo: '',
+        amount: '',
+        targetAddress: '',
+        gas: '',
+        gasPrice: '',
+        transactionHash: '',
+        nativeTransactionHash: '',
+        tab: '',
+        submitting: false,
+        finished: false,
+        transactionError: '',
+        extraWarning: ''
     }
   },
-  created() {
+     created() {
     this.wallet.connect = this.connectWallet
 
     this.web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('http://localhost:8545'))
@@ -308,7 +310,6 @@ export default {
       let targetApiAddr = (this.env === "TESTNET" ? "https://api.testnet.evm.eosnetwork.com/" : "https://api.evm.eosnetwork.com/");
       let targetExplorerAddr = (this.env === "TESTNET" ? "https://explorer.testnet.evm.eosnetwork.com" : "https://explorer.evm.eosnetwork.com");
       let targetNetworkName = (this.env === "TESTNET" ? "EOS-EVM Testnet2" : "EOS-EVM");
-      console.log(chainId)
       if (chainId != targetChainid) {
         try {
           window.alert(this.$t('home.swtichNetPrompt'))
@@ -346,8 +347,8 @@ export default {
             }
 
           }
-          console.log("Cannot switch to the network.")
-          console.log(switchError)
+          console.error("Cannot switch to the network.")
+          console.error(switchError)
 
         }
       }
@@ -406,20 +407,33 @@ export default {
           gasPrice: this.gasPrice,
           data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
         });
-        const result = await this.web3.eth.sendTransaction({
-          from: this.address,
-          to: this.addressEvm,
-          value: this.transferValue,
-          gas: this.gas,
-          data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
-        })
-        this.transactionHash = result.transactionHash
-        this.getBalance()
-        this.targetAddress = ''
-        this.amount = ''
-        this.gas = ''
-        this.finished = true
-        setTimeout(() => {
+
+          let result;
+          await this.web3.eth.sendTransaction({
+            from: this.address,
+            to: this.addressEvm,
+            value: this.transferValue,
+            gas: this.gas,
+            data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
+        }).on('receipt', async function (receipt) {
+            // Get block containing the tx/
+            const blockInfo = await this.web3.eth.getBlock(receipt.blockHash)
+            // Eos block hash is in the mixHash field of the evm block header.
+            const block_num_or_id = blockInfo.mixHash.slice(2)
+            // Fetch EOS block, we do not use the function provided by the package as it miss fields in the return value.
+            const block = await rpc.fetch('/v1/chain/get_block', { block_num_or_id })
+
+            // EOS tx id is the result.transactions.trx.id
+            this.nativeTransactionHash = block.transactions.trx.id
+            this.transactionHash = receipt.transactionHash
+            result = receipt;
+        });
+          this.getBalance()
+                this.targetAddress = ''
+                this.amount = ''
+                this.gas = ''
+                this.finished = true
+                setTimeout(() => {
           this.finished = false
         }, 2000)
       } catch (err) {
