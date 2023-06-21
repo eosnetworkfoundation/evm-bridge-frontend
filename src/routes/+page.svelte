@@ -7,16 +7,35 @@
  import { convertAddress, truncateAddress, stringToHexString } from '@/utils/string-utils';
  import { wallet } from '@/stores';
 
+ const chainIdDetails = {
+     testnet: {
+         targetChainId: 15557,
+         targetChainIdHex: '0x3CC5',
+         targetApiAddress: 'https://api.testnet.evm.eosnetwork.com/',
+         targetExplorerAddress: 'https://explorer.testnet.evm.eosnetwork.com',
+         targetNetworkName: 'EOS-EVM Testnet2'
+     },
+     mainnet: {
+         targetChainId: 17777,
+         targetChainIdHex: '0x4571',
+         targetApiAddress: 'https://api.evm.eosnetwork.com/',
+         targetExplorerAddress: 'https://explorer.evm.eosnetwork.com',
+         targetNetworkName: 'EOS-EVM'
+     }
+ };
+ 
  const blockList = ['eosbndeposit', 'gateiowallet', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'okbtothemoon']
  const warningList = ['huobideposit']
  const WITHDRAW = 'WITHDRAW';
  const DEPOSIT = 'DEPOSIT';
- 
+
  let activeTab = WITHDRAW;
  
  let sourceAddress = '';
  let destinationAddress = '';
  let evmAddress = '';
+ let transactionHash = '';
+ 
  let balance = 0;
  let amount = 0;
  let memo = '';
@@ -95,8 +114,58 @@
      gas = await provider.estimateGas({
          to: evmAddress,
          value: transferValue(),
-         data: bytesToHexString(stringToUTF8Bytes(memo)),
+         data: stringToHexString(memo),
      });
+ }
+
+ async function checkChainID() {
+     if (!signer) return;
+
+     const chainId = await signer.getChainId();
+     const {
+         targetChainId,
+         targetChainIdHex,
+         targetApiAddress,
+         targetExplorerAddress,
+         targetNetworkName
+     } = chainIdDetails[isTestnet() ? 'testnet' : 'mainnet'] ?? {};
+     if (chainId === targetChainId) return;
+
+     // Alerts
+ }
+
+ async function transfer() {
+     try {
+         isSubmitting = true;
+         transactionHash = '';
+         
+         // Alerts
+
+         calculateFee();
+
+         const result = await signer.sendTransaction({
+             from: sourceAddress,
+             to: destinationAddress,
+             value: ethers.utils.parseEther(amount),
+             nonce: window.ethersProvider.getTransactionCount(sourceAddress, 'latest'),
+             gasLimit: ethers.utils.hexlify('0x100000'),
+             gasPrice
+         });
+
+         transactionHash = result.transactionHash;
+         getBalance();
+         destinationAddress = '';
+         amount = 0;
+         gas = 0;
+         isFinished = true;
+         setTimeout(() => {
+             isFinished = false;
+         }, 2000);
+     } catch (error) {
+         console.error(error);
+     } finally {
+         isSubmitting = false;
+     }
  }
  
  $: evmAddress = destinationAddress ? convertAddress(destinationAddress) : '';
