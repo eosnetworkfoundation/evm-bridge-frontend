@@ -6,21 +6,21 @@
           <b-card>
             <b-row align-v="center">
               <b-col class="text-center text-sm-start" sm="auto" style="min-width: 4em;">
-                <b>{{$t('home.from')}}</b>
+                <b>{{ $t('home.from') }}</b>
               </b-col>
               <b-col>
                 <div class="mb-3">
                   <div class="row align-items-end">
                     <div class="col">
-                      <label for="from">{{$t('home.address')}}</label>
+                      <label for="from">{{ $t('home.address') }}</label>
                       <input type="search" id="from" class="form-control" v-model="address" maxlength="42" disabled>
                     </div>
                     <div class="col col-auto">
                       <b-button class="connect-btn" variant="primary" @click="connectWallet()"
                         :disabled="wallet.connecting">
-                        <span v-if="wallet.connected">{{$t('home.connected')}}</span>
-                        <span v-else-if="wallet.connecting">{{$t('home.connecting')}}</span>
-                        <span v-else>{{$t('home.connectWallet')}}</span>
+                        <span v-if="wallet.connected">{{ $t('home.connected') }}</span>
+                        <span v-else-if="wallet.connecting">{{ $t('home.connecting') }}</span>
+                        <span v-else>{{ $t('home.connectWallet') }}</span>
                       </b-button>
                     </div>
                   </div>
@@ -28,14 +28,14 @@
 
                 <div class="row align-items-center">
                   <div class="col">
-                    <label for="amount">{{$t('home.amount')}}</label>
+                    <label for="amount">{{ $t('home.amount') }}</label>
                     <input type="number" id="amount" class="form-control" min="0" :max="balance"
                       :disabled="!wallet.connected" v-model="amount">
                     <div class="form-text">
-                      {{$t('home.myBalance')}}
+                      {{ $t('home.myBalance') }}
                       <span id="balance" v-if="balance">{{ balance }}</span>
                     </div>
-                    <div class="text-danger" v-if="exceeded">{{$t('home.insufficient')}}</div>
+                    <div class="text-danger" v-if="exceeded">{{ $t('home.insufficient') }}</div>
                   </div>
                   <div class="col-auto">
                     <img src="../assets/eos.png" alt="EOS" style="height: 38px;" draggable="false">
@@ -52,15 +52,15 @@
           <b-card>
             <b-row align-v="center">
               <b-col class="text-center text-sm-start" sm="auto" style="min-width: 4em;">
-                <b>{{$t('home.to')}}</b>
+                <b>{{ $t('home.to') }}</b>
               </b-col>
               <b-col>
                 <div class="mb-3">
-                  <label for="address">{{$t('home.destinationAccount')}}</label>
-                  <div class="form-text mb-2">{{$t('home.destinationAccountDesc')}}</div>
+                  <label for="address">{{ $t('home.destinationAccount') }}</label>
+                  <div class="form-text mb-2">{{ $t('home.destinationAccountDesc') }}</div>
                   <input type="text" id="address" class="form-control select" @change="calcFee" v-model="targetAddress"
                     maxlength="13" list="addresses">
-                  <div class="form-text font-monospace" v-if='extraWarning!==""'>
+                  <div class="form-text font-monospace" v-if='extraWarning !== ""'>
                     <span style="color: red">{{ extraWarning }}</span>
                   </div>
                   <div class="form-text font-monospace" v-if="addressEvm">
@@ -70,13 +70,13 @@
                 </div>
                 <div>
                   <label class="mb-1" for="memo" id="memoTooltip">
-                    {{$t('home.memoLabel')}}
+                    {{ $t('home.memoLabel') }}
                     <span class="text-success">
                       <fa icon="info-circle" />
                     </span>
                   </label>
                   <b-popover target="memoTooltip" triggers="hover focus">
-                    {{$t('home.memoTooltip')}}
+                    {{ $t('home.memoTooltip') }}
                   </b-popover>
                   <input type="text" id="memo" class="form-control" v-model="memo">
                 </div>
@@ -85,26 +85,37 @@
           </b-card>
 
           <div class="d-grid mt-4">
-            <b-button variant="primary" @click="transfer" class="transfer-btn"
-              :disabled="disableTransfer">
-              <span v-if="submitting">{{$t('home.transferOngoing')}}</span>
-              <span v-else-if="finished">{{$t('home.transferSuccess')}}</span>
-              <span v-else>{{$t('home.transfer')}}</span>
+            <b-button variant="primary" @click="transfer" class="transfer-btn" :disabled="disableTransfer">
+              <span v-if="submitting">{{ $t('home.transferOngoing') }}</span>
+              <span v-else-if="finished">{{ $t('home.transferSuccess') }}</span>
+              <span v-else>{{ $t('home.transfer') }}</span>
             </b-button>
           </div>
 
           <div class="mt-2 text-center small text-white">
-            {{$t('home.gasFee')}}
+            {{ $t('home.gasFee') }}
             <span v-if="transferFee">~{{ transferFee }}EOS</span>
             <br>
-            {{$t('home.transferTime', ['~5 s'])}}
+            {{ $t('home.transferTime', ['~5 s']) }}
             <br>
-            {{$t('home.exchangeTime', ['~ 3 mins'])}}
+            {{ $t('home.exchangeTime', ['~ 3 mins']) }}
           </div>
 
           <div class="transaction-hash" v-if="transactionHash">
-            {{$t('home.lastTransaction')}}
-            {{ transactionHash }}
+            {{ $t('home.lastTransaction') }}
+            <br>
+            {{ transactionHash.slice(0, 6) + '...' + transactionHash.slice(-4) }}
+            <br>
+            <a class="dummy-link" @click="copyText(transactionHash)">{{ $t('home.copyEvmTx') }}</a> &nbsp&nbsp<a :href="getEvmTxExplorerUrl(transactionHash)" target="_blank" rel="noopener noreferrer">{{ $t('home.viewEvmTx') }}</a>
+            <br>
+            {{ $t('home.eosTx') }}
+            <br>
+            <span v-if="eosHash && eosHash != 'error'">{{ eosHash.slice(0, 4) + '...' + eosHash.slice(-4) }}
+              <br>
+            <a class="dummy-link" @click="copyText(eosHash)">{{ $t('home.copyEosTx') }}</a> &nbsp&nbsp<a :href="getEosTxExplorerUrl(eosHash)" target="_blank" rel="noopener noreferrer">{{ $t('home.viewEosTx') }}</a>
+          </span>
+            <span v-else-if="eosHash == 'error'">{{ $t('home.eosTxError') }}</span>
+            <span v-else>{{ $t('home.eosTxPending') }}</span>
           </div>
           <div class="error" v-if="transactionError">{{ transactionError }}</div>
         </div>
@@ -113,17 +124,17 @@
         <b-card>
           <b-row align-v="center">
             <b-col class="text-center text-sm-start" sm="auto" style="min-width: 4em;">
-              <b>{{$t('home.from')}}</b>
+              <b>{{ $t('home.from') }}</b>
             </b-col>
             <div class="col">
               <span style="color: red">
-                <p v-if="env === 'TESTNET'">{{$t('home.netWarning.testnet')}}</p>
-                <p v-else>{{$t('home.netWarning.mainnet')}}</p>
+                <p v-if="env === 'TESTNET'">{{ $t('home.netWarning.testnet') }}</p>
+                <p v-else>{{ $t('home.netWarning.mainnet') }}</p>
 
-                <p>{{$t('home.netWarning.desc')}}</p>
+                <p>{{ $t('home.netWarning.desc') }}</p>
               </span>
-              <p>{{$t('home.eos2evmDesc.p1')}}</p>
-              <p>{{$t('home.eos2evmDesc.p2')}}</p>
+              <p>{{ $t('home.eos2evmDesc.p1') }}</p>
+              <p>{{ $t('home.eos2evmDesc.p2') }}</p>
             </div>
           </b-row>
         </b-card>
@@ -133,36 +144,36 @@
         <b-card class="mt-3">
           <b-row align-v="center">
             <b-col class="text-center text-sm-start" sm="auto" style="min-width: 4em;">
-              <b>{{$t('home.to')}}</b>
+              <b>{{ $t('home.to') }}</b>
             </b-col>
             <div class="col">
               <div class="mb-3">
-                <label>{{$t('home.destinationAccount')}}</label>
-                <div class="form-text">{{$t('home.destinationAccountDescCopy')}}</div>
+                <label>{{ $t('home.destinationAccount') }}</label>
+                <div class="form-text">{{ $t('home.destinationAccountDescCopy') }}</div>
                 <div class="row align-items-end">
                   <div class="col">
                     <div class="input-group">
                       <input type="search" class="form-control" disabled value="eosio.evm" id="addr">
-                      <button class="btn btn-secondary" @click="copyText('eosio.evm')">{{$t('home.copy')}}</button>
+                      <button class="btn btn-secondary" @click="copyText('eosio.evm')">{{ $t('home.copy') }}</button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="mb-3">
-                <label>{{$t('home.depositMemoLabel')}}</label>
+                <label>{{ $t('home.depositMemoLabel') }}</label>
                 <div class="form-text">
-                  {{$t('home.addressTitle')}}<br>
+                  {{ $t('home.addressTitle') }}<br>
                   <i18n-t keypath="home.addressDesc" v-if="!address">
                     <b-link @click="connectWallet" :disabled="wallet.connecting">
                       <fa icon="spinner" spin v-if="wallet.connecting" />
-                      {{$t('home.connectEvmWallet')}}
+                      {{ $t('home.connectEvmWallet') }}
                     </b-link>
                   </i18n-t>
                 </div>
                 <div class="input-group">
                   <input type="text" class="form-control" disabled :value="address" id="deposit-memo">
                   <button class="btn btn-secondary" :disabled="!address" @click="copyText(address)">
-                    {{$t('home.copy')}}
+                    {{ $t('home.copy') }}
                   </button>
                 </div>
 
@@ -172,14 +183,14 @@
         </b-card>
 
         <div class="d-grid mt-4 text-center small text-white">
-          {{$t('home.depositDesc')}}
+          {{ $t('home.depositDesc') }}
         </div>
 
         <div class="mt-2 text-center small text-white">
-          {{$t('home.bridgeFee')}}
+          {{ $t('home.bridgeFee') }}
           <span>0.01 EOS</span>
           <br>
-          {{$t('home.transferTime', ['~ 5 s'])}}
+          {{ $t('home.transferTime', ['~ 5 s']) }}
         </div>
       </b-tab>
     </b-tabs>
@@ -190,6 +201,13 @@
 import Web3 from 'web3'
 import BN from 'bn.js'
 import clipboardCopy from '../utils/copy-text'
+
+import { Api, JsonRpc, RpcError } from 'enf-eosjs';
+
+
+const rpc = new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch });
+const api = new Api({ rpc, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
+
 const blockList = ['eosbndeposit', 'gateiowallet', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'okbtothemoon']
 const warningList = ['huobideposit']
 
@@ -206,6 +224,7 @@ export default {
       gas: '',
       gasPrice: '',
       transactionHash: '',
+      eosHash: '',
       tab: '',
       submitting: false,
       finished: false,
@@ -251,11 +270,11 @@ export default {
         this.extraWarning = ''
         return ''
       }
-      
+
       if (blockList.includes(this.targetAddress)) {
         return new Error(this.$t('home.cexNotSupported'))
       }
-      
+
       if (warningList.includes(this.targetAddress)) {
         this.extraWarning = this.$t('home.cexExtraWarning')
       } else {
@@ -285,7 +304,7 @@ export default {
     }
   },
   methods: {
-    
+
 
     async calcFee() {
       if (this.disableTransfer) {
@@ -392,10 +411,20 @@ export default {
       ).join("");
     },
 
+    getEvmTxExplorerUrl(tx) {
+      let targetExplorerAddr = (this.env === "TESTNET" ? "https://explorer.testnet.evm.eosnetwork.com" : "https://explorer.evm.eosnetwork.com");
+      return targetExplorerAddr + '/tx/' + tx
+    },
+
+    getEosTxExplorerUrl(tx) {
+      let targetExplorerAddr = (this.env === "TESTNET" ? "https://jungle4.eosq.eosnation.io" : "https://eos.eosq.eosnation.io");
+      return targetExplorerAddr + '/tx/' + tx
+    },
+
     async transfer() {
       try {
         this.submitting = true
-        this.transactionHash = ''
+        
         if (!window.confirm(this.$t('home.transferConfirm', [this.amount, this.targetAddress]))) {
           return
         }
@@ -406,14 +435,69 @@ export default {
           gasPrice: this.gasPrice,
           data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
         });
-        const result = await this.web3.eth.sendTransaction({
+        var vm = this
+
+        // Send EVM Transaction
+        await this.web3.eth.sendTransaction({
           from: this.address,
           to: this.addressEvm,
           value: this.transferValue,
           gas: this.gas,
           data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
+        }).on('receipt', async function (receipt) {
+          // Receipt contains tx hash.
+          vm.transactionHash = receipt.transactionHash
+          vm.eosHash = ''
+          // Get block containing the tx/
+          const blockinfo = await vm.web3.eth.getBlock(receipt.blockHash)
+
+          // Eos block hash is in the mixHash field of the evm block header.
+          var hash = blockinfo.mixHash.slice(2)
+
+          // Fetch EOS block, we do not use the function provided by the package as it miss fields in the return value.
+          var r = await rpc.fetch('/v1/chain/get_block', { block_num_or_id: hash })
+          // EOS tx id is the result.transactions.trx.id
+          // EVM tx is in eos_block.transactions.trx.transaction.actions[n]
+          // There should be only one action in each eos transaction for those EVM transactions.
+          // We can filter the action by action.account === 'eosio.evm' and locate the rlptx of the EVM tx in action.data.rlptx
+          // EVM tx hash = keccak256(rlptx)
+          var txs = r.transactions.map((t) => {
+            if (t.trx.transaction != undefined) {
+              return t.trx.transaction.actions.map((e) => { e.txid = t.trx.id; return e });
+            }
+            else return [];
+          }).flat().filter(
+            (e) => e.account === 'eosio.evm' && e.data && e.data.rlptx && vm.web3.utils.keccak256("0x" + e.data.rlptx) === vm.transactionHash
+          )
+
+          // One EVM block will cover one second of time. So there will be two EOS blocks.
+          // If we cannot find the tx in the block located by the mixHash, try the previous one.
+          // It's in theory possible to have more than or less than two EOS blocks related to one EVM block,
+          // but for the frontend display, hardcoded two queries should be fine. 
+          // We can make the logic more general and more robust if necessary.
+          if (txs.length == 0) {
+            var r2 = await rpc.fetch('/v1/chain/get_block', { block_num_or_id: r.previous })
+
+            txs = r2.transactions.map((t) => {
+              if (t.trx.transaction != undefined) {
+                return t.trx.transaction.actions.map((e) => { e.txid = t.trx.id; return e });
+              }
+              else return [];
+            }).flat().filter(
+              (e) => e.account === 'eosio.evm' && e.data && e.data.rlptx && vm.web3.utils.keccak256("0x" + e.data.rlptx) === vm.transactionHash
+            )
+
+
+          }
+          // Should only found one though....
+          if (txs.length > 0) {
+            vm.eosHash = txs[0].txid
+          }
+          else {
+            vm.eosHash = "error"
+          }
         })
-        this.transactionHash = result.transactionHash
+
         this.getBalance()
         this.targetAddress = ''
         this.amount = ''
@@ -550,5 +634,14 @@ export default {
   .fade {
     transition: none;
   }
+}
+
+.transaction-hash {
+  color: #fff;
+}
+
+.dummy-link {
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  cursor: pointer;
 }
 </style>
