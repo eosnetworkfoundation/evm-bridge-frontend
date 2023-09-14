@@ -489,29 +489,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^1.2.6":
-  version: 1.2.6
-  resolution: "@floating-ui/core@npm:1.2.6::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Fcore%2F-%2Fcore-1.2.6.tgz"
-  checksum: e4aa96c435277f1720d4bc939e17a79b1e1eebd589c20b622d3c646a5273590ff889b8c6e126f7be61873cf8c4d7db7d418895986ea19b8b0d0530de32504c3a
+"@floating-ui/core@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@floating-ui/core@npm:1.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Fcore%2F-%2Fcore-1.4.1.tgz"
+  dependencies:
+    "@floating-ui/utils": ^0.1.1
+  checksum: be4ab864fe17eeba5e205bd554c264b9a4895a57c573661bbf638357fa3108677fed7ba3269ec15b4da90e29274c9b626d5a15414e8d1fe691e210d02a03695c
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^1.2.9":
-  version: 1.2.9
-  resolution: "@floating-ui/dom@npm:1.2.9::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Fdom%2F-%2Fdom-1.2.9.tgz"
+"@floating-ui/dom@npm:^1.4.5":
+  version: 1.5.2
+  resolution: "@floating-ui/dom@npm:1.5.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Fdom%2F-%2Fdom-1.5.2.tgz"
   dependencies:
-    "@floating-ui/core": ^1.2.6
-  checksum: 16ae5e05a41c2ca16d51579d12729ca9d346241319f68ce5678f5fbeb9c4f9a16176c95089bbd7a0eb37c6ed90e5fd55a310ffc9948af7c841d5b8bfa0afe1b8
+    "@floating-ui/core": ^1.4.1
+    "@floating-ui/utils": ^0.1.1
+  checksum: 3c71eed50bb22cec8f1f31750ad3d42b3b7b4b29dc6e4351100ff05a62445a5404abb71c733320f8376a8c5e78852e1cfba1b81e22bfc4ca0728f50ca8998dc5
   languageName: node
   linkType: hard
 
-"@floating-ui/vue@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "@floating-ui/vue@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Fvue%2F-%2Fvue-1.0.1.tgz"
+"@floating-ui/utils@npm:^0.1.1":
+  version: 0.1.2
+  resolution: "@floating-ui/utils@npm:0.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Futils%2F-%2Futils-0.1.2.tgz"
+  checksum: 3e29fd3c69be2d27bb95ebe54129a6a29ea2d8112b2cbb568168cf2f1e787e6ed6305d743598469476bec28122b7ea3ea4b54a1a2d59d30dc4b4307391472299
+  languageName: node
+  linkType: hard
+
+"@floating-ui/vue@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@floating-ui/vue@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40floating-ui%2Fvue%2F-%2Fvue-1.0.2.tgz"
   dependencies:
-    "@floating-ui/dom": ^1.2.9
+    "@floating-ui/dom": ^1.4.5
     vue-demi: ">=0.13.0"
-  checksum: 788667333aac314ee78039e2ee2c65e39ed897639f8c21fbe47af9c2343beecd90134d969a57ce121692dfc53bae9ec506a0e184e6567cdb713e9ee012e2c677
+  checksum: bf206a354a0a452a450350f38e48d5223f5331169ee62e7b479dd0b0d87b81172fa5ad9508f98f5e74fbbb1b8834a0b44d72757f90a2718d7c7372cbd5a72193
   languageName: node
   linkType: hard
 
@@ -602,6 +612,107 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lit-labs/ssr-dom-shim@npm:^1.0.0, @lit-labs/ssr-dom-shim@npm:^1.1.0":
+  version: 1.1.1
+  resolution: "@lit-labs/ssr-dom-shim@npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40lit-labs%2Fssr-dom-shim%2F-%2Fssr-dom-shim-1.1.1.tgz"
+  checksum: 7a7add78e3ee570a7b987b9bf85e700b20d35d31c8b54cf4c8b2e3c8458ed4e2b0ff328706e5be7887f0ca8a02878c186e76609defb78f0d1b3c0e6b47c9f6ef
+  languageName: node
+  linkType: hard
+
+"@lit/reactive-element@npm:^1.3.0, @lit/reactive-element@npm:^1.6.0":
+  version: 1.6.3
+  resolution: "@lit/reactive-element@npm:1.6.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40lit%2Freactive-element%2F-%2Freactive-element-1.6.3.tgz"
+  dependencies:
+    "@lit-labs/ssr-dom-shim": ^1.0.0
+  checksum: 79b58631c38effeabad090070324431da8a22cf0ff665f5e4de35e4d791f984742b3d340c9c7fce996d1124a8da95febc582471b4c237236c770b1300b56ef6e
+  languageName: node
+  linkType: hard
+
+"@motionone/animation@npm:^10.15.1":
+  version: 10.15.1
+  resolution: "@motionone/animation@npm:10.15.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Fanimation%2F-%2Fanimation-10.15.1.tgz"
+  dependencies:
+    "@motionone/easing": ^10.15.1
+    "@motionone/types": ^10.15.1
+    "@motionone/utils": ^10.15.1
+    tslib: ^2.3.1
+  checksum: 75b7a1e6c47c27073a578eb5559ea0a6e7075862c72e1eb1598403c8c2725f596a95b0369514c9e72f3c7439a9845c468b85a14d4e500df48e09d01b0739d4a7
+  languageName: node
+  linkType: hard
+
+"@motionone/dom@npm:^10.16.2":
+  version: 10.16.2
+  resolution: "@motionone/dom@npm:10.16.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Fdom%2F-%2Fdom-10.16.2.tgz"
+  dependencies:
+    "@motionone/animation": ^10.15.1
+    "@motionone/generators": ^10.15.1
+    "@motionone/types": ^10.15.1
+    "@motionone/utils": ^10.15.1
+    hey-listen: ^1.0.8
+    tslib: ^2.3.1
+  checksum: c75a7de62cd8af575634644bbc2c5abe606ff9000550e7b8d5a62ea691a0784bf18f57035bd1fad4b0148dbdc6db033f2565b6c8f80b87b40fbb232db8fe93aa
+  languageName: node
+  linkType: hard
+
+"@motionone/easing@npm:^10.15.1":
+  version: 10.15.1
+  resolution: "@motionone/easing@npm:10.15.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Feasing%2F-%2Feasing-10.15.1.tgz"
+  dependencies:
+    "@motionone/utils": ^10.15.1
+    tslib: ^2.3.1
+  checksum: cf7cfcf9917525d892334c58282425aafc69d9ab9004c190bfa7cf91317a680e8143f227adc79557424e7f26cdf8478dcbb2ae467e744cebc58195d6f0b8153a
+  languageName: node
+  linkType: hard
+
+"@motionone/generators@npm:^10.15.1":
+  version: 10.15.1
+  resolution: "@motionone/generators@npm:10.15.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Fgenerators%2F-%2Fgenerators-10.15.1.tgz"
+  dependencies:
+    "@motionone/types": ^10.15.1
+    "@motionone/utils": ^10.15.1
+    tslib: ^2.3.1
+  checksum: 0eb6797a64d536bb5c26628343d6594a2ebc45c3c447b8ce442b4ac3a41be847b860ac009bda7968fc7d339d2ee49b18bfe36306c5dd99cf17c7d84c82de93f3
+  languageName: node
+  linkType: hard
+
+"@motionone/svelte@npm:^10.16.2":
+  version: 10.16.2
+  resolution: "@motionone/svelte@npm:10.16.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Fsvelte%2F-%2Fsvelte-10.16.2.tgz"
+  dependencies:
+    "@motionone/dom": ^10.16.2
+    tslib: ^2.3.1
+  checksum: 066570d991444f9b8e70189b488d563260cf7aadc2e4718e60b66e2871ad0d798e4a39282035c7f0d35a6b2118c36ee222446a8ae0919265860f0d808fcd2837
+  languageName: node
+  linkType: hard
+
+"@motionone/types@npm:^10.15.1":
+  version: 10.15.1
+  resolution: "@motionone/types@npm:10.15.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Ftypes%2F-%2Ftypes-10.15.1.tgz"
+  checksum: 98091f7dca257508d94d1080678c433da39a814e8e58aaa742212bf6c2a5b5e2120a6251a06e3ea522219ce6d1b6eb6aa2cab224b803fe52789033d8398ef0aa
+  languageName: node
+  linkType: hard
+
+"@motionone/utils@npm:^10.15.1":
+  version: 10.15.1
+  resolution: "@motionone/utils@npm:10.15.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Futils%2F-%2Futils-10.15.1.tgz"
+  dependencies:
+    "@motionone/types": ^10.15.1
+    hey-listen: ^1.0.8
+    tslib: ^2.3.1
+  checksum: 6ef13cd6637ec87c340e5536f849f8c40d30cc90139a3856d11cd70d78e3740f8815b0e63564fefd23c05a060da7a0ea5395390549606ed8801a7b832b74e04e
+  languageName: node
+  linkType: hard
+
+"@motionone/vue@npm:^10.16.2":
+  version: 10.16.2
+  resolution: "@motionone/vue@npm:10.16.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40motionone%2Fvue%2F-%2Fvue-10.16.2.tgz"
+  dependencies:
+    "@motionone/dom": ^10.16.2
+    tslib: ^2.3.1
+  checksum: 37732f679bdf84debb36493e12fe2604ca3d1812ce8271e39dbe28bb4e59d71841d6821a5f5dd07ded918e260f8567842b835ea597572a38007e8a11106d1f0f
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40nodelib%2Ffs.scandir%2F-%2Ffs.scandir-2.1.5.tgz"
@@ -660,6 +771,176 @@ __metadata:
   version: 4.6.0
   resolution: "@sindresorhus/is@npm:4.6.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40sindresorhus%2Fis%2F-%2Fis-4.6.0.tgz"
   checksum: 83839f13da2c29d55c97abc3bc2c55b250d33a0447554997a85c539e058e57b8da092da396e252b11ec24a0279a0bed1f537fa26302209327060643e327f81d2
+  languageName: node
+  linkType: hard
+
+"@stablelib/aead@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/aead@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Faead%2F-%2Faead-1.0.1.tgz"
+  checksum: 1a6f68d138f105d17dd65349751515bd252ab0498c77255b8555478d28415600dde493f909eb718245047a993f838dfae546071e1687566ffb7b8c3e10c918d9
+  languageName: node
+  linkType: hard
+
+"@stablelib/binary@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/binary@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fbinary%2F-%2Fbinary-1.0.1.tgz"
+  dependencies:
+    "@stablelib/int": ^1.0.1
+  checksum: dca9b98eb1f56a4002b5b9e7351fbc49f3d8616af87007c01e833bd763ac89214eb5f3b7e18673c91ce59d4a0e4856a2eb661ace33d39f17fb1ad267271fccd8
+  languageName: node
+  linkType: hard
+
+"@stablelib/bytes@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/bytes@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fbytes%2F-%2Fbytes-1.0.1.tgz"
+  checksum: 456267e08c3384abcb71d3ad3e97a6f99185ad754bac016f501ebea4e4886f37900589143b57e33bdbbf513a92fc89368c15dd4517e0540d0bdc79ecdf9dd087
+  languageName: node
+  linkType: hard
+
+"@stablelib/chacha20poly1305@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/chacha20poly1305@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fchacha20poly1305%2F-%2Fchacha20poly1305-1.0.1.tgz"
+  dependencies:
+    "@stablelib/aead": ^1.0.1
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/chacha": ^1.0.1
+    "@stablelib/constant-time": ^1.0.1
+    "@stablelib/poly1305": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 81f1a32330838d31e4dc3144d76eba7244b56d9ea38c1f604f2c34d93ed8e67e9a6167d2cfd72254c13cc46dfc1f5ce5157b37939a575295d69d9144abb4e4fb
+  languageName: node
+  linkType: hard
+
+"@stablelib/chacha@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/chacha@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fchacha%2F-%2Fchacha-1.0.1.tgz"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: f061f36c4ca4bf177dd7cac11e7c65ced164f141b6065885141ae5a55f32e16ba0209aefcdcc966aef013f1da616ce901a3a80653b4b6f833cf7e3397ae2d6bd
+  languageName: node
+  linkType: hard
+
+"@stablelib/constant-time@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/constant-time@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fconstant-time%2F-%2Fconstant-time-1.0.1.tgz"
+  checksum: dba4f4bf508de2ff15f7f0cbd875e70391aa3ba3698290fe1ed2feb151c243ba08a90fc6fb390ec2230e30fcc622318c591a7c0e35dcb8150afb50c797eac3d7
+  languageName: node
+  linkType: hard
+
+"@stablelib/ed25519@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "@stablelib/ed25519@npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fed25519%2F-%2Fed25519-1.0.3.tgz"
+  dependencies:
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha512": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: e18279de078edac67396ba07dbb862dce0fe89efa8141c21a5b04108a29914bd51636019522323ca5097ec596a90b3028ed64e88ee009b0ac7de7c1ab6499ccb
+  languageName: node
+  linkType: hard
+
+"@stablelib/hash@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/hash@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fhash%2F-%2Fhash-1.0.1.tgz"
+  checksum: 3ff1f12d1a4082aaf4b6cdf40c2010aabe5c4209d3b40b97b5bbb0d9abc0ee94abdc545e57de0614afaea807ca0212ac870e247ec8f66cdce91ec39ce82948cf
+  languageName: node
+  linkType: hard
+
+"@stablelib/hkdf@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/hkdf@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fhkdf%2F-%2Fhkdf-1.0.1.tgz"
+  dependencies:
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/hmac": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 9d45e303715a1835c8612b78e6c1b9d2b7463699b484241d8681fb5c17e0f2bbde5ce211c882134b64616a402e09177baeba80426995ff227b3654a155ab225d
+  languageName: node
+  linkType: hard
+
+"@stablelib/hmac@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/hmac@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fhmac%2F-%2Fhmac-1.0.1.tgz"
+  dependencies:
+    "@stablelib/constant-time": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: e3b93f7144a5846a6e30213278f7570de6d3f9d09131b95ce76d5c5c8bf37bf5d1830f2ee8d847555707271dbfd6e2461221719fd4d8b27ff06b9dd689c0ec21
+  languageName: node
+  linkType: hard
+
+"@stablelib/int@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/int@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fint%2F-%2Fint-1.0.1.tgz"
+  checksum: 65bfbf50a382eea70c68e05366bf379cfceff8fbc076f1c267ef2f2411d7aed64fd140c415cb6c29f19a3910d3b8b7805d4b32ad5721a5007a8e744a808c7ae3
+  languageName: node
+  linkType: hard
+
+"@stablelib/keyagreement@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/keyagreement@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fkeyagreement%2F-%2Fkeyagreement-1.0.1.tgz"
+  dependencies:
+    "@stablelib/bytes": ^1.0.1
+  checksum: 3c8ec904dd50f72f3162f5447a0fa8f1d9ca6e24cd272d3dbe84971267f3b47f9bd5dc4e4eeedf3fbac2fe01f2d9277053e57c8e60db8c5544bfb35c62d290dd
+  languageName: node
+  linkType: hard
+
+"@stablelib/poly1305@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/poly1305@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fpoly1305%2F-%2Fpoly1305-1.0.1.tgz"
+  dependencies:
+    "@stablelib/constant-time": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 70b845bb0481c66b7ba3f3865d01e4c67a4dffc9616fc6de1d23efc5e828ec09de25f8e3be4e1f15a23b8e87e3036ee3d949c2fd4785047e6f7028bbec0ead18
+  languageName: node
+  linkType: hard
+
+"@stablelib/random@npm:^1.0.1, @stablelib/random@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@stablelib/random@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Frandom%2F-%2Frandom-1.0.2.tgz"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: f5ace0a588dc4c21f01cb85837892d4c872e994ae77a58a8eb7dd61aa0b26fb1e9b46b0445e71af57d963ef7d9f5965c64258fc0d04df7b2947bc48f2d3560c5
+  languageName: node
+  linkType: hard
+
+"@stablelib/sha256@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/sha256@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fsha256%2F-%2Fsha256-1.0.1.tgz"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: 38669871e1bda72eb537629ebceac1c72da8890273a9fbe088f81f6d14c1ec04e78be8c5b455380a06c67f8e62b2508e11e9063fcc257dbaa1b5c27ac756ba77
+  languageName: node
+  linkType: hard
+
+"@stablelib/sha512@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/sha512@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fsha512%2F-%2Fsha512-1.0.1.tgz"
+  dependencies:
+    "@stablelib/binary": ^1.0.1
+    "@stablelib/hash": ^1.0.1
+    "@stablelib/wipe": ^1.0.1
+  checksum: b7c82f7608a35948a2147a534c0c9afc80deab3fd5f72a2e27b2454e7c0c6944d39381be3abcb1b7fac5b824ba030ae3e98209d517a579c143d8ed63930b042f
+  languageName: node
+  linkType: hard
+
+"@stablelib/wipe@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@stablelib/wipe@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fwipe%2F-%2Fwipe-1.0.1.tgz"
+  checksum: 287802eb146810a46ba72af70b82022caf83a8aeebde23605f5ee0decf64fe2b97a60c856e43b6617b5801287c30cfa863cfb0469e7fcde6f02d143cf0c6cbf4
+  languageName: node
+  linkType: hard
+
+"@stablelib/x25519@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@stablelib/x25519@npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40stablelib%2Fx25519%2F-%2Fx25519-1.0.3.tgz"
+  dependencies:
+    "@stablelib/keyagreement": ^1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/wipe": ^1.0.1
+  checksum: f8537066b542b6770c1b5b2ae5ad0688d1b986e4bf818067c152c123a5471531987bbf024224f75f387f481ccc5b628e391e49e92102b8b1a3e2d449d6105402
   languageName: node
   linkType: hard
 
@@ -763,6 +1044,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: 1bd10b9afa724084b655dc81b7b315def3d2d0e272014ef16009fa76e17537411c07c0695fdea412bc7b36d2a02687f5fea33522d55b8ef29eda42992f812913
+  languageName: node
+  linkType: hard
+
+"@types/trusted-types@npm:^2.0.2":
+  version: 2.0.4
+  resolution: "@types/trusted-types@npm:2.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Ftrusted-types%2F-%2Ftrusted-types-2.0.4.tgz"
+  checksum: 5256c4576cd1c90d33ddd9cc9cbd4f202b39c98cbe8b7f74963298f9eb2159c285ea5c25a6181b4c594d8d75641765bff85d72c2d251ad076e6529ce0eeedd1c
   languageName: node
   linkType: hard
 
@@ -902,31 +1190,354 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:^10.1.2":
-  version: 10.1.2
-  resolution: "@vueuse/core@npm:10.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40vueuse%2Fcore%2F-%2Fcore-10.1.2.tgz"
+"@vueuse/core@npm:^10.4.1":
+  version: 10.4.1
+  resolution: "@vueuse/core@npm:10.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40vueuse%2Fcore%2F-%2Fcore-10.4.1.tgz"
   dependencies:
     "@types/web-bluetooth": ^0.0.17
-    "@vueuse/metadata": 10.1.2
-    "@vueuse/shared": 10.1.2
-    vue-demi: ">=0.14.0"
-  checksum: a18286495f4dc0783c3251455a1636d4913381204059e72e8d8ed02c63d4f911ebe2cbb1e9526fdca73640bb5b47bd6bd9b5842a501614f0aeab4bc721fc92a4
+    "@vueuse/metadata": 10.4.1
+    "@vueuse/shared": 10.4.1
+    vue-demi: ">=0.14.5"
+  checksum: 2232ad6dd3af89aee80d38ffcbe6a3386d1f55f66ac212baac10c3a506f43ee58a4fffabaa7ec483e62dbf6f231ee7ce1fb82ab91f9312e2d9f8c554810d2773
   languageName: node
   linkType: hard
 
-"@vueuse/metadata@npm:10.1.2":
-  version: 10.1.2
-  resolution: "@vueuse/metadata@npm:10.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40vueuse%2Fmetadata%2F-%2Fmetadata-10.1.2.tgz"
-  checksum: b72470776ec6aeb88a21b4a60b6b365ad22559c965b7038ae8c68a6a2942631748f3beb4b715bdde3d8adb1dac06a5ebeb41255f24d60c8f28f19ac6fa3bc152
+"@vueuse/metadata@npm:10.4.1":
+  version: 10.4.1
+  resolution: "@vueuse/metadata@npm:10.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40vueuse%2Fmetadata%2F-%2Fmetadata-10.4.1.tgz"
+  checksum: d9c584f4581eed4e7e81423916077dada73b22ee3f1e798682aac1ee640a91b0287088f26dc7e72d7b6ad2e6c8d630fd7ee8ba02ca5987c033ed8391e92b5542
   languageName: node
   linkType: hard
 
-"@vueuse/shared@npm:10.1.2":
-  version: 10.1.2
-  resolution: "@vueuse/shared@npm:10.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40vueuse%2Fshared%2F-%2Fshared-10.1.2.tgz"
+"@vueuse/shared@npm:10.4.1":
+  version: 10.4.1
+  resolution: "@vueuse/shared@npm:10.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40vueuse%2Fshared%2F-%2Fshared-10.4.1.tgz"
   dependencies:
-    vue-demi: ">=0.14.0"
-  checksum: a134cc254bfef28ceca2c48c7532a4f1e2231dbb75304e43f896b41771f3d51b93897cc9a16bbd98c7aa6163fc44e001319bbf2478408382ef4d9788875301f2
+    vue-demi: ">=0.14.5"
+  checksum: e1cc0b970e0ce06c8bc2cbed3ce37a9ee7ff0667fc3f354398b4201259db1848da428d62c9ea19c3124f5eb80ce0b3f97328f537e3238ec68cdbb726ff3e3fe8
+  languageName: node
+  linkType: hard
+
+"@walletconnect/core@npm:2.10.1":
+  version: 2.10.1
+  resolution: "@walletconnect/core@npm:2.10.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fcore%2F-%2Fcore-2.10.1.tgz"
+  dependencies:
+    "@walletconnect/heartbeat": 1.2.1
+    "@walletconnect/jsonrpc-provider": 1.0.13
+    "@walletconnect/jsonrpc-types": 1.0.3
+    "@walletconnect/jsonrpc-utils": 1.0.8
+    "@walletconnect/jsonrpc-ws-connection": 1.0.13
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    "@walletconnect/relay-api": ^1.0.9
+    "@walletconnect/relay-auth": ^1.0.4
+    "@walletconnect/safe-json": ^1.0.2
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.10.1
+    "@walletconnect/utils": 2.10.1
+    events: ^3.3.0
+    lodash.isequal: 4.5.0
+    uint8arrays: ^3.1.0
+  checksum: d58ae15c53efe1792da8c7aa1b7ba47efb49807cfe0c73f225d59c5cd847a0e50979ce6965b94915812412deba3e5aa2dca13a02bd41c087e85575e99afad223
+  languageName: node
+  linkType: hard
+
+"@walletconnect/environment@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@walletconnect/environment@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fenvironment%2F-%2Fenvironment-1.0.1.tgz"
+  dependencies:
+    tslib: 1.14.1
+  checksum: a18731d857bdca73910147e59992cef3c6e292c37ab3d3013307bd706f06cb216aa804f0f48b25a78df6493ad8127e633629f4b50acb4f69d3765d6ac0524f68
+  languageName: node
+  linkType: hard
+
+"@walletconnect/ethereum-provider@npm:^2.10.1":
+  version: 2.10.1
+  resolution: "@walletconnect/ethereum-provider@npm:2.10.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fethereum-provider%2F-%2Fethereum-provider-2.10.1.tgz"
+  dependencies:
+    "@walletconnect/jsonrpc-http-connection": ^1.0.7
+    "@walletconnect/jsonrpc-provider": ^1.0.13
+    "@walletconnect/jsonrpc-types": ^1.0.3
+    "@walletconnect/jsonrpc-utils": ^1.0.8
+    "@walletconnect/sign-client": 2.10.1
+    "@walletconnect/types": 2.10.1
+    "@walletconnect/universal-provider": 2.10.1
+    "@walletconnect/utils": 2.10.1
+    events: ^3.3.0
+  peerDependencies:
+    "@walletconnect/modal": ">=2"
+  peerDependenciesMeta:
+    "@walletconnect/modal":
+      optional: true
+  checksum: ec3d88ba101a5d8f193262b5b1e770cccad6457ec56fa1f3d17fa531de4e07e8cf03a1341669122c61956f0d5c3a6eca57d3f12f524e046acddb401cdb76fe7c
+  languageName: node
+  linkType: hard
+
+"@walletconnect/events@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@walletconnect/events@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fevents%2F-%2Fevents-1.0.1.tgz"
+  dependencies:
+    keyvaluestorage-interface: ^1.0.0
+    tslib: 1.14.1
+  checksum: d28aa4dcc981bdaf38f0aeed979731ca793cead7e7a4ee730a9146d99d89db09a86c8e3192ed860638283276961c0723ba00cf3b8776f0692b36ec7df6c01be4
+  languageName: node
+  linkType: hard
+
+"@walletconnect/heartbeat@npm:1.2.1":
+  version: 1.2.1
+  resolution: "@walletconnect/heartbeat@npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fheartbeat%2F-%2Fheartbeat-1.2.1.tgz"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/time": ^1.0.2
+    tslib: 1.14.1
+  checksum: df4d492a2d336283f834bc205c09b795f85cd507a61b14745dc2124e510a250fefbd83d51216f93df2e0aa0cf8120134db2679de8019eddd63877e9928997952
+  languageName: node
+  linkType: hard
+
+"@walletconnect/jsonrpc-http-connection@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "@walletconnect/jsonrpc-http-connection@npm:1.0.7::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fjsonrpc-http-connection%2F-%2Fjsonrpc-http-connection-1.0.7.tgz"
+  dependencies:
+    "@walletconnect/jsonrpc-utils": ^1.0.6
+    "@walletconnect/safe-json": ^1.0.1
+    cross-fetch: ^3.1.4
+    tslib: 1.14.1
+  checksum: c4efcd46d4b344727ca6879badca2c2f855499ac76c8dace5d118f4423167adce34e41a99f3dcab0febb945ce51c6ef0ac8556567d5e38d8dad864b131eb5b00
+  languageName: node
+  linkType: hard
+
+"@walletconnect/jsonrpc-provider@npm:1.0.13, @walletconnect/jsonrpc-provider@npm:^1.0.13":
+  version: 1.0.13
+  resolution: "@walletconnect/jsonrpc-provider@npm:1.0.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fjsonrpc-provider%2F-%2Fjsonrpc-provider-1.0.13.tgz"
+  dependencies:
+    "@walletconnect/jsonrpc-utils": ^1.0.8
+    "@walletconnect/safe-json": ^1.0.2
+    tslib: 1.14.1
+  checksum: 497dfdd9f988432f171bc98336f3583c679059f0a166f95d6e51c8e1937c17abd9a5fd3aadfcebf6964bae14edd1e05fb0453e370d6e3bbc7ff4919fcad7c478
+  languageName: node
+  linkType: hard
+
+"@walletconnect/jsonrpc-types@npm:1.0.3, @walletconnect/jsonrpc-types@npm:^1.0.2, @walletconnect/jsonrpc-types@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@walletconnect/jsonrpc-types@npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fjsonrpc-types%2F-%2Fjsonrpc-types-1.0.3.tgz"
+  dependencies:
+    keyvaluestorage-interface: ^1.0.0
+    tslib: 1.14.1
+  checksum: 26e6f1d8f4207328d3df465c36d0d67844772863dc8e9e78e6cfec417cfc359300eab049d99ea558982b3f0948f4ca26b75253bdf635ffd82ffe30a5276b790c
+  languageName: node
+  linkType: hard
+
+"@walletconnect/jsonrpc-utils@npm:1.0.8, @walletconnect/jsonrpc-utils@npm:^1.0.6, @walletconnect/jsonrpc-utils@npm:^1.0.7, @walletconnect/jsonrpc-utils@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "@walletconnect/jsonrpc-utils@npm:1.0.8::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fjsonrpc-utils%2F-%2Fjsonrpc-utils-1.0.8.tgz"
+  dependencies:
+    "@walletconnect/environment": ^1.0.1
+    "@walletconnect/jsonrpc-types": ^1.0.3
+    tslib: 1.14.1
+  checksum: f43a85dfce8150c3e3d1f009e8d8241ab8e10b026ea435f0918edf4db6b3a17586ba9d9c54a93cc61e4d3c685611e5bd5954fc377a581af503acd38e6d84c2ef
+  languageName: node
+  linkType: hard
+
+"@walletconnect/jsonrpc-ws-connection@npm:1.0.13":
+  version: 1.0.13
+  resolution: "@walletconnect/jsonrpc-ws-connection@npm:1.0.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fjsonrpc-ws-connection%2F-%2Fjsonrpc-ws-connection-1.0.13.tgz"
+  dependencies:
+    "@walletconnect/jsonrpc-utils": ^1.0.6
+    "@walletconnect/safe-json": ^1.0.2
+    events: ^3.3.0
+    tslib: 1.14.1
+    ws: ^7.5.1
+  checksum: f2253b17564f7622e69b1252830f05efdf7f4d58b120adb3a3e950c2087845171c912307c39948d0b869aa8610688b83f54f54de4657091f7431aea95a59f8b9
+  languageName: node
+  linkType: hard
+
+"@walletconnect/keyvaluestorage@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@walletconnect/keyvaluestorage@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fkeyvaluestorage%2F-%2Fkeyvaluestorage-1.0.2.tgz"
+  dependencies:
+    safe-json-utils: ^1.1.1
+    tslib: 1.14.1
+  peerDependencies:
+    "@react-native-async-storage/async-storage": 1.x
+    lokijs: 1.x
+  peerDependenciesMeta:
+    "@react-native-async-storage/async-storage":
+      optional: true
+    lokijs:
+      optional: true
+  checksum: d695c2efcfa013a43cfaa20c85281df7d364a4452d11a4312a695298bd0e50d04b0e21c828f33f46fb020ea9796e60a6b23041a85f29bd10beeba7d0da24539f
+  languageName: node
+  linkType: hard
+
+"@walletconnect/logger@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@walletconnect/logger@npm:2.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Flogger%2F-%2Flogger-2.0.1.tgz"
+  dependencies:
+    pino: 7.11.0
+    tslib: 1.14.1
+  checksum: b686679d176d5d22a3441d93e71be2652e6c447682a6d6f014baf7c2d9dcd23b93e2f434d4410e33cc532d068333f6b3c1d899aeb0d6f60cc296ed17f57b0c2c
+  languageName: node
+  linkType: hard
+
+"@walletconnect/modal-core@npm:2.6.2":
+  version: 2.6.2
+  resolution: "@walletconnect/modal-core@npm:2.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fmodal-core%2F-%2Fmodal-core-2.6.2.tgz"
+  dependencies:
+    valtio: 1.11.2
+  checksum: 94daceba50c323b06ecbeac2968d9f0972f327359c6118887c6526cd64006249b12f64322d71bc6c4a2b928436ecc89cf3d3af706511fcdc264c1f4b34a2dd5d
+  languageName: node
+  linkType: hard
+
+"@walletconnect/modal-ui@npm:2.6.2":
+  version: 2.6.2
+  resolution: "@walletconnect/modal-ui@npm:2.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fmodal-ui%2F-%2Fmodal-ui-2.6.2.tgz"
+  dependencies:
+    "@walletconnect/modal-core": 2.6.2
+    lit: 2.8.0
+    motion: 10.16.2
+    qrcode: 1.5.3
+  checksum: cd1ec0205eb491e529670599d3dd26f6782d7c5a99d5594bf6949a8c760c1c5f4eb6ed72b8662450774fe4e2dd47678f2c05145c8f2494bd7153446ddf4bd7ed
+  languageName: node
+  linkType: hard
+
+"@walletconnect/modal@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "@walletconnect/modal@npm:2.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fmodal%2F-%2Fmodal-2.6.2.tgz"
+  dependencies:
+    "@walletconnect/modal-core": 2.6.2
+    "@walletconnect/modal-ui": 2.6.2
+  checksum: 68b354d49960b96d22de0e47a3801df27c01a3e96ec5fbde3ca6df1344ca2b20668b0c4d58fe1803f5670ac7b7b4c6f5b7b405e354f5f9eaff5cca147c13de9c
+  languageName: node
+  linkType: hard
+
+"@walletconnect/relay-api@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@walletconnect/relay-api@npm:1.0.9::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Frelay-api%2F-%2Frelay-api-1.0.9.tgz"
+  dependencies:
+    "@walletconnect/jsonrpc-types": ^1.0.2
+    tslib: 1.14.1
+  checksum: 5870579b6552f1ce7351878f1acb8386b0c11288c64d39133c7cee5040feeb7ccf9114228d97a59749d60366ad107b097d656407d534567c24f5d3878ea6e246
+  languageName: node
+  linkType: hard
+
+"@walletconnect/relay-auth@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@walletconnect/relay-auth@npm:1.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Frelay-auth%2F-%2Frelay-auth-1.0.4.tgz"
+  dependencies:
+    "@stablelib/ed25519": ^1.0.2
+    "@stablelib/random": ^1.0.1
+    "@walletconnect/safe-json": ^1.0.1
+    "@walletconnect/time": ^1.0.2
+    tslib: 1.14.1
+    uint8arrays: ^3.0.0
+  checksum: 35b3229d7b57e74fdb8fe6827d8dd8291dc60bacda880a57b2acb47a34d38f12be46c971c9eff361eb4073e896648b550de7a7a3852ef3752f9619c08dfba891
+  languageName: node
+  linkType: hard
+
+"@walletconnect/safe-json@npm:^1.0.1, @walletconnect/safe-json@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@walletconnect/safe-json@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fsafe-json%2F-%2Fsafe-json-1.0.2.tgz"
+  dependencies:
+    tslib: 1.14.1
+  checksum: fee03fcc70adb5635ab9419ea6ec6555aa2467bef650ad3b9526451c3a5cf247836db0f3ae3bb435d2e585d99e50c2ebe7dc9c429cfa3df900cf3fe4bd06d37f
+  languageName: node
+  linkType: hard
+
+"@walletconnect/sign-client@npm:2.10.1":
+  version: 2.10.1
+  resolution: "@walletconnect/sign-client@npm:2.10.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fsign-client%2F-%2Fsign-client-2.10.1.tgz"
+  dependencies:
+    "@walletconnect/core": 2.10.1
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.1
+    "@walletconnect/jsonrpc-utils": 1.0.8
+    "@walletconnect/logger": ^2.0.1
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.10.1
+    "@walletconnect/utils": 2.10.1
+    events: ^3.3.0
+  checksum: dbdced8dece73b20ae73df9c0cf0d9e3eee753f6c81e264c87583ca60d1d13d4f7d61944e4b22d1f70c5f32424fd842a7de778838aa7d0ae27195976a86e102f
+  languageName: node
+  linkType: hard
+
+"@walletconnect/time@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@walletconnect/time@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Ftime%2F-%2Ftime-1.0.2.tgz"
+  dependencies:
+    tslib: 1.14.1
+  checksum: e3fc0113ca9e7ecedfc65f9e1517196682d5ffcda60750f51073b8d704719a17fea75da8b242c804bfa5b994707723043892a2db3cc86988b190b7b8711fe3c0
+  languageName: node
+  linkType: hard
+
+"@walletconnect/types@npm:2.10.1":
+  version: 2.10.1
+  resolution: "@walletconnect/types@npm:2.10.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Ftypes%2F-%2Ftypes-2.10.1.tgz"
+  dependencies:
+    "@walletconnect/events": ^1.0.1
+    "@walletconnect/heartbeat": 1.2.1
+    "@walletconnect/jsonrpc-types": 1.0.3
+    "@walletconnect/keyvaluestorage": ^1.0.2
+    "@walletconnect/logger": ^2.0.1
+    events: ^3.3.0
+  checksum: b663a236404bb423d3cc5cde656794ce42132f09193da5a51dac815d844f78eebb29c7275ebe10f6134492db21386ffd81b66ce42992332847b72c9128f74990
+  languageName: node
+  linkType: hard
+
+"@walletconnect/universal-provider@npm:2.10.1":
+  version: 2.10.1
+  resolution: "@walletconnect/universal-provider@npm:2.10.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Funiversal-provider%2F-%2Funiversal-provider-2.10.1.tgz"
+  dependencies:
+    "@walletconnect/jsonrpc-http-connection": ^1.0.7
+    "@walletconnect/jsonrpc-provider": 1.0.13
+    "@walletconnect/jsonrpc-types": ^1.0.2
+    "@walletconnect/jsonrpc-utils": ^1.0.7
+    "@walletconnect/logger": ^2.0.1
+    "@walletconnect/sign-client": 2.10.1
+    "@walletconnect/types": 2.10.1
+    "@walletconnect/utils": 2.10.1
+    events: ^3.3.0
+  checksum: a33ad597a7601157cd96bceb7637c3463a5df981e5548c5343ab84f92c542bd7cae577fb2884d549164c9ad8262b097dc5fc0bc7fd9a515ee7c3f30b271cb034
+  languageName: node
+  linkType: hard
+
+"@walletconnect/utils@npm:2.10.1":
+  version: 2.10.1
+  resolution: "@walletconnect/utils@npm:2.10.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Futils%2F-%2Futils-2.10.1.tgz"
+  dependencies:
+    "@stablelib/chacha20poly1305": 1.0.1
+    "@stablelib/hkdf": 1.0.1
+    "@stablelib/random": ^1.0.2
+    "@stablelib/sha256": 1.0.1
+    "@stablelib/x25519": ^1.0.3
+    "@walletconnect/relay-api": ^1.0.9
+    "@walletconnect/safe-json": ^1.0.2
+    "@walletconnect/time": ^1.0.2
+    "@walletconnect/types": 2.10.1
+    "@walletconnect/window-getters": ^1.0.1
+    "@walletconnect/window-metadata": ^1.0.1
+    detect-browser: 5.3.0
+    query-string: 7.1.3
+    uint8arrays: ^3.1.0
+  checksum: 150d1a3c75ce0736ffc8ed8a844e3dc63476e556f7f308154ee6bc9d99e08907bc11a504b7ce3889951293b48d9eef4e32b84de1c7f27b7a84e6731a7bb65189
+  languageName: node
+  linkType: hard
+
+"@walletconnect/window-getters@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@walletconnect/window-getters@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fwindow-getters%2F-%2Fwindow-getters-1.0.1.tgz"
+  dependencies:
+    tslib: 1.14.1
+  checksum: fae312c4e1be5574d97f071de58e6aa0d0296869761499caf9d4a9a5fd2643458af32233a2120521b00873a599ff88457d405bd82ced5fb5bd6dc3191c07a3e5
+  languageName: node
+  linkType: hard
+
+"@walletconnect/window-metadata@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@walletconnect/window-metadata@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2F%40walletconnect%2Fwindow-metadata%2F-%2Fwindow-metadata-1.0.1.tgz"
+  dependencies:
+    "@walletconnect/window-getters": ^1.0.1
+    tslib: 1.14.1
+  checksum: e82aea7195c6fe95c00e87bb38051c5549838c2e8302da94f1afa48206f79f0b620166c9820f847494505d282d1568e2086a1561b0493d2d0a1fa115f9106aef
   languageName: node
   linkType: hard
 
@@ -1021,7 +1632,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^4.1.0":
+"ansi-styles@npm:^4.0.0, ansi-styles@npm:^4.1.0":
   version: 4.3.0
   resolution: "ansi-styles@npm:4.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fansi-styles%2F-%2Fansi-styles-4.3.0.tgz"
   dependencies:
@@ -1098,6 +1709,13 @@ __metadata:
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fasynckit%2F-%2Fasynckit-0.4.0.tgz"
   checksum: 7b78c451df768adba04e2d02e63e2d0bf3b07adcd6e42b4cf665cb7ce899bedd344c69a1dcbce355b5f972d597b25aaa1c1742b52cffd9caccb22f348114f6be
+  languageName: node
+  linkType: hard
+
+"atomic-sleep@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "atomic-sleep@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fatomic-sleep%2F-%2Fatomic-sleep-1.0.0.tgz"
+  checksum: b95275afb2f80732f22f43a60178430c468906a415a7ff18bcd0feeebc8eec3930b51250aeda91a476062a90e07132b43a1794e8d8ffcf9b650e8139be75fa36
   languageName: node
   linkType: hard
 
@@ -1189,6 +1807,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bn.js@npm:5.2.0":
+  version: 5.2.0
+  resolution: "bn.js@npm:5.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fbn.js%2F-%2Fbn.js-5.2.0.tgz"
+  checksum: 6117170393200f68b35a061ecbf55d01dd989302e7b3c798a3012354fa638d124f0b2f79e63f77be5556be80322a09c40339eda6413ba7468524c0b6d4b4cb7a
+  languageName: node
+  linkType: hard
+
 "bn.js@npm:^4.11.6, bn.js@npm:^4.11.9":
   version: 4.12.0
   resolution: "bn.js@npm:4.12.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fbn.js%2F-%2Fbn.js-4.12.0.tgz"
@@ -1250,15 +1875,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bootstrap-vue-next@npm:^0.9.4":
-  version: 0.9.4
-  resolution: "bootstrap-vue-next@npm:0.9.4::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fbootstrap-vue-next%2F-%2Fbootstrap-vue-next-0.9.4.tgz"
+"bootstrap-vue-next@npm:^0.12.3":
+  version: 0.12.3
+  resolution: "bootstrap-vue-next@npm:0.12.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fbootstrap-vue-next%2F-%2Fbootstrap-vue-next-0.12.3.tgz"
   dependencies:
-    "@floating-ui/vue": ^1.0.0
-    "@vueuse/core": ^10.1.2
+    "@floating-ui/vue": ^1.0.2
+    "@vueuse/core": ^10.4.1
   peerDependencies:
     vue: ^3.3.4
-  checksum: 945cd38b56138e1d8e0ca0266a3f40d14fd2e12380bb2f2f8cbceaf54dd49aa5f860547b7c8f5972d2f1bb0db6617df86396b0a7b03c1dd069980abd7c70c2f3
+  checksum: 9d41658dd934c14f20ce91aa0b3008e6a0b39025ba279f465618877c56b93b287a07f2a278532593a4ee8c87878b1c9e40236e3471dd92bcf8aaa27f2f879c8d
   languageName: node
   linkType: hard
 
@@ -1453,6 +2078,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"camelcase@npm:^5.0.0":
+  version: 5.3.1
+  resolution: "camelcase@npm:5.3.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fcamelcase%2F-%2Fcamelcase-5.3.1.tgz"
+  checksum: e6effce26b9404e3c0f301498184f243811c30dfe6d0b9051863bd8e4034d09c8c2923794f280d6827e5aa055f6c434115ff97864a16a963366fb35fd673024b
+  languageName: node
+  linkType: hard
+
 "caseless@npm:~0.12.0":
   version: 0.12.0
   resolution: "caseless@npm:0.12.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fcaseless%2F-%2Fcaseless-0.12.0.tgz"
@@ -1544,6 +2176,17 @@ __metadata:
   version: 1.0.1
   resolution: "clipboard.js@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fclipboard.js%2F-%2Fclipboard.js-1.0.1.tgz"
   checksum: 8e1e7183c337fe4b7383d67a61ffc3b02fa1e92e6c7cc99cf09c7486f6cf558d2572a120820fd0dc994539f3ba96e077076d6158262a6cfe994e2de6f33e019d
+  languageName: node
+  linkType: hard
+
+"cliui@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "cliui@npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fcliui%2F-%2Fcliui-6.0.0.tgz"
+  dependencies:
+    string-width: ^4.2.0
+    strip-ansi: ^6.0.0
+    wrap-ansi: ^6.2.0
+  checksum: 4fcfd26d292c9f00238117f39fc797608292ae36bac2168cfee4c85923817d0607fe21b3329a8621e01aedf512c99b7eaa60e363a671ffd378df6649fb48ae42
   languageName: node
   linkType: hard
 
@@ -1774,7 +2417,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"decode-uri-component@npm:^0.2.0":
+"decamelize@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "decamelize@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdecamelize%2F-%2Fdecamelize-1.2.0.tgz"
+  checksum: ad8c51a7e7e0720c70ec2eeb1163b66da03e7616d7b98c9ef43cce2416395e84c1e9548dd94f5f6ffecfee9f8b94251fc57121a8b021f2ff2469b2bae247b8aa
+  languageName: node
+  linkType: hard
+
+"decode-uri-component@npm:^0.2.0, decode-uri-component@npm:^0.2.2":
   version: 0.2.2
   resolution: "decode-uri-component@npm:0.2.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdecode-uri-component%2F-%2Fdecode-uri-component-0.2.2.tgz"
   checksum: 95476a7d28f267292ce745eac3524a9079058bbb35767b76e3ee87d42e34cd0275d2eb19d9d08c3e167f97556e8a2872747f5e65cbebcac8b0c98d83e285f139
@@ -1841,6 +2491,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detect-browser@npm:5.3.0":
+  version: 5.3.0
+  resolution: "detect-browser@npm:5.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdetect-browser%2F-%2Fdetect-browser-5.3.0.tgz"
+  checksum: dd6e08d55da1d9e0f22510ac79872078ae03d9dfa13c5e66c96baedc1c86567345a88f96949161f6be8f3e0fafa93bf179bdb1cd311b14f5f163112fcc70ab49
+  languageName: node
+  linkType: hard
+
+"dijkstrajs@npm:^1.0.1":
+  version: 1.0.3
+  resolution: "dijkstrajs@npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdijkstrajs%2F-%2Fdijkstrajs-1.0.3.tgz"
+  checksum: 82ff2c6633f235dd5e6bed04ec62cdfb1f327b4d7534557bd52f18991313f864ee50654543072fff4384a92b643ada4d5452f006b7098dbdfad6c8744a8c9e08
+  languageName: node
+  linkType: hard
+
 "doctrine@npm:^3.0.0":
   version: 3.0.0
   resolution: "doctrine@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdoctrine%2F-%2Fdoctrine-3.0.0.tgz"
@@ -1854,6 +2518,18 @@ __metadata:
   version: 0.1.2
   resolution: "dom-walk@npm:0.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fdom-walk%2F-%2Fdom-walk-0.1.2.tgz"
   checksum: 19eb0ce9c6de39d5e231530685248545d9cd2bd97b2cb3486e0bfc0f2a393a9addddfd5557463a932b52fdfcf68ad2a619020cd2c74a5fe46fbecaa8e80872f3
+  languageName: node
+  linkType: hard
+
+"duplexify@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "duplexify@npm:4.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fduplexify%2F-%2Fduplexify-4.1.2.tgz"
+  dependencies:
+    end-of-stream: ^1.4.1
+    inherits: ^2.0.3
+    readable-stream: ^3.1.1
+    stream-shift: ^1.0.0
+  checksum: 964376c61c0e92f6ed0694b3ba97c84f199413dc40ab8dfdaef80b7a7f4982fcabf796214e28ed614a5bc1ec45488a29b81e7d46fa3f5ddf65bcb118c20145ad
   languageName: node
   linkType: hard
 
@@ -1896,6 +2572,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"encode-utf8@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "encode-utf8@npm:1.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fencode-utf8%2F-%2Fencode-utf8-1.0.3.tgz"
+  checksum: 550224bf2a104b1d355458c8a82e9b4ea07f9fc78387bc3a49c151b940ad26473de8dc9e121eefc4e84561cb0b46de1e4cd2bc766f72ee145e9ea9541482817f
+  languageName: node
+  linkType: hard
+
 "encodeurl@npm:~1.0.2":
   version: 1.0.2
   resolution: "encodeurl@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fencodeurl%2F-%2Fencodeurl-1.0.2.tgz"
@@ -1912,12 +2595,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"end-of-stream@npm:^1.1.0":
+"end-of-stream@npm:^1.1.0, end-of-stream@npm:^1.4.1":
   version: 1.4.4
   resolution: "end-of-stream@npm:1.4.4::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fend-of-stream%2F-%2Fend-of-stream-1.4.4.tgz"
   dependencies:
     once: ^1.4.0
   checksum: 530a5a5a1e517e962854a31693dbb5c0b2fc40b46dad2a56a2deec656ca040631124f4795823acc68238147805f8b021abbe221f4afed5ef3c8e8efc2024908b
+  languageName: node
+  linkType: hard
+
+"enf-eosjs@npm:^23.0.0":
+  version: 23.0.0
+  resolution: "enf-eosjs@npm:23.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fenf-eosjs%2F-%2Fenf-eosjs-23.0.0.tgz"
+  dependencies:
+    bn.js: 5.2.0
+    elliptic: 6.5.4
+    hash.js: 1.1.7
+    node-fetch: 2.6.7
+  checksum: f66da068b7bd935cf314c2c30a442bb64cecb82e8024cac4d4bfb6cf4fc344f6d09e966bb41355a9a8c2b80e443590b8bb2cf01e331a693cd2418ac33ec14390
   languageName: node
   linkType: hard
 
@@ -2343,10 +3038,13 @@ __metadata:
   dependencies:
     "@popperjs/core": ^2.11.8
     "@vitejs/plugin-vue": ^4.2.3
+    "@walletconnect/ethereum-provider": ^2.10.1
+    "@walletconnect/modal": ^2.6.2
     bn.js: ^5.2.1
     bootstrap: ^5.3.0
-    bootstrap-vue-next: ^0.9.4
+    bootstrap-vue-next: ^0.12.3
     clipboard.js: ^1.0.1
+    enf-eosjs: ^23.0.0
     eslint: ^8.42.0
     eslint-plugin-vue: ^9.14.1
     events: ^3.3.0
@@ -2461,6 +3159,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-redact@npm:^3.0.0":
+  version: 3.3.0
+  resolution: "fast-redact@npm:3.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ffast-redact%2F-%2Ffast-redact-3.3.0.tgz"
+  checksum: 3f7becc70a5a2662a9cbfdc52a4291594f62ae998806ee00315af307f32d9559dbf512146259a22739ee34401950ef47598c1f4777d33b0ed5027203d67f549c
+  languageName: node
+  linkType: hard
+
 "fastq@npm:^1.6.0":
   version: 1.15.0
   resolution: "fastq@npm:1.15.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ffastq%2F-%2Ffastq-1.15.0.tgz"
@@ -2488,6 +3193,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"filter-obj@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "filter-obj@npm:1.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ffilter-obj%2F-%2Ffilter-obj-1.1.0.tgz"
+  checksum: cf2104a7c45ff48e7f505b78a3991c8f7f30f28bd8106ef582721f321f1c6277f7751aacd5d83026cb079d9d5091082f588d14a72e7c5d720ece79118fa61e10
+  languageName: node
+  linkType: hard
+
 "finalhandler@npm:1.2.0":
   version: 1.2.0
   resolution: "finalhandler@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ffinalhandler%2F-%2Ffinalhandler-1.2.0.tgz"
@@ -2500,6 +3212,16 @@ __metadata:
     statuses: 2.0.1
     unpipe: ~1.0.0
   checksum: 92effbfd32e22a7dff2994acedbd9bcc3aa646a3e919ea6a53238090e87097f8ef07cced90aa2cc421abdf993aefbdd5b00104d55c7c5479a8d00ed105b45716
+  languageName: node
+  linkType: hard
+
+"find-up@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "find-up@npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ffind-up%2F-%2Ffind-up-4.1.0.tgz"
+  dependencies:
+    locate-path: ^5.0.0
+    path-exists: ^4.0.0
+  checksum: 4c172680e8f8c1f78839486e14a43ef82e9decd0e74145f40707cc42e7420506d5ec92d9a11c22bd2c48fb0c384ea05dd30e10dd152fefeec6f2f75282a8b844
   languageName: node
   linkType: hard
 
@@ -2653,6 +3375,13 @@ __metadata:
     strip-ansi: ^6.0.1
     wide-align: ^1.1.5
   checksum: 788b6bfe52f1dd8e263cda800c26ac0ca2ff6de0b6eee2fe0d9e3abf15e149b651bd27bf5226be10e6e3edb5c4e5d5985a5a1a98137e7a892f75eff76467ad2d
+  languageName: node
+  linkType: hard
+
+"get-caller-file@npm:^2.0.1":
+  version: 2.0.5
+  resolution: "get-caller-file@npm:2.0.5::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fget-caller-file%2F-%2Fget-caller-file-2.0.5.tgz"
+  checksum: b9769a836d2a98c3ee734a88ba712e62703f1df31b94b784762c433c27a386dd6029ff55c2a920c392e33657d80191edbf18c61487e198844844516f843496b9
   languageName: node
   linkType: hard
 
@@ -2900,6 +3629,13 @@ __metadata:
     inherits: ^2.0.3
     minimalistic-assert: ^1.0.1
   checksum: e350096e659c62422b85fa508e4b3669017311aa4c49b74f19f8e1bc7f3a54a584fdfd45326d4964d6011f2b2d882e38bea775a96046f2a61b7779a979629d8f
+  languageName: node
+  linkType: hard
+
+"hey-listen@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "hey-listen@npm:1.0.8::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fhey-listen%2F-%2Fhey-listen-1.0.8.tgz"
+  checksum: 6bad60b367688f5348e25e7ca3276a74b59ac5a09b0455e6ff8ab7d4a9e38cd2116c708a7dcd8a954d27253ce1d8717ec891d175723ea739885b828cf44e4072
   languageName: node
   linkType: hard
 
@@ -3351,6 +4087,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"keyvaluestorage-interface@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "keyvaluestorage-interface@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fkeyvaluestorage-interface%2F-%2Fkeyvaluestorage-interface-1.0.0.tgz"
+  checksum: e20530e71b738dc094ad170a91a98d4b9bdc772dd9044b23cdaaa102aafa8997b1ac867550a1e66ba1d64fcaa949214df31aed18413b4bac31e5fe1f2c76c9de
+  languageName: node
+  linkType: hard
+
 "klona@npm:^2.0.6":
   version: 2.0.6
   resolution: "klona@npm:2.0.6::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fklona%2F-%2Fklona-2.0.6.tgz"
@@ -3368,12 +4111,59 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lit-element@npm:^3.3.0":
+  version: 3.3.3
+  resolution: "lit-element@npm:3.3.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Flit-element%2F-%2Flit-element-3.3.3.tgz"
+  dependencies:
+    "@lit-labs/ssr-dom-shim": ^1.1.0
+    "@lit/reactive-element": ^1.3.0
+    lit-html: ^2.8.0
+  checksum: 29a596fa556e231cce7246ca3e5687ad238f299b0cb374a0934d5e6fe9adf1436e031d4fbd21b280aabfc0e21a66e6c4b52da558a908df2566d09d960f3ca93d
+  languageName: node
+  linkType: hard
+
+"lit-html@npm:^2.8.0":
+  version: 2.8.0
+  resolution: "lit-html@npm:2.8.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Flit-html%2F-%2Flit-html-2.8.0.tgz"
+  dependencies:
+    "@types/trusted-types": ^2.0.2
+  checksum: 2d70df07248bcb2f502a3afb1e91d260735024fa669669ffb1417575aa39c3092779725ac1b90f5f39e4ce78c63f431f51176bc67f532389f0285a6991573255
+  languageName: node
+  linkType: hard
+
+"lit@npm:2.8.0":
+  version: 2.8.0
+  resolution: "lit@npm:2.8.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Flit%2F-%2Flit-2.8.0.tgz"
+  dependencies:
+    "@lit/reactive-element": ^1.6.0
+    lit-element: ^3.3.0
+    lit-html: ^2.8.0
+  checksum: 2480e733f7d022d3ecba91abc58a20968f0ca8f5fa30b3341ecf4bcf4845e674ad27b721a5ae53529cafc6ca603c015b80d0979ceb7a711e268ef20bb6bc7527
+  languageName: node
+  linkType: hard
+
+"locate-path@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "locate-path@npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Flocate-path%2F-%2Flocate-path-5.0.0.tgz"
+  dependencies:
+    p-locate: ^4.1.0
+  checksum: 83e51725e67517287d73e1ded92b28602e3ae5580b301fe54bfb76c0c723e3f285b19252e375712316774cf52006cb236aed5704692c32db0d5d089b69696e30
+  languageName: node
+  linkType: hard
+
 "locate-path@npm:^6.0.0":
   version: 6.0.0
   resolution: "locate-path@npm:6.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Flocate-path%2F-%2Flocate-path-6.0.0.tgz"
   dependencies:
     p-locate: ^5.0.0
   checksum: 72eb661788a0368c099a184c59d2fee760b3831c9c1c33955e8a19ae4a21b4116e53fa736dc086cdeb9fce9f7cc508f2f92d2d3aae516f133e16a2bb59a39f5a
+  languageName: node
+  linkType: hard
+
+"lodash.isequal@npm:4.5.0":
+  version: 4.5.0
+  resolution: "lodash.isequal@npm:4.5.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Flodash.isequal%2F-%2Flodash.isequal-4.5.0.tgz"
+  checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
   languageName: node
   linkType: hard
 
@@ -3714,6 +4504,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"motion@npm:10.16.2":
+  version: 10.16.2
+  resolution: "motion@npm:10.16.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fmotion%2F-%2Fmotion-10.16.2.tgz"
+  dependencies:
+    "@motionone/animation": ^10.15.1
+    "@motionone/dom": ^10.16.2
+    "@motionone/svelte": ^10.16.2
+    "@motionone/types": ^10.15.1
+    "@motionone/utils": ^10.15.1
+    "@motionone/vue": ^10.16.2
+  checksum: 0b91256808c2374d8b7f4ac5e7ed513f2ca8df2b7d1be4fbc00ec5baece5162ada648aedaa5bc1d60be9ad2e6c9bc1d3bb160333051c20ab79e241b8e02e3c92
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fms%2F-%2Fms-2.0.0.tgz"
@@ -3771,6 +4575,13 @@ __metadata:
     buffer: ^5.6.0
     varint: ^5.0.0
   checksum: e6a2916fa76c023b1c90b32ae74f8a781cf0727f71660b245a5ed1db46add6f2ce1586bee5713b16caf0a724e81bfe0678d89910c20d3bb5fd9649dacb2be79e
+  languageName: node
+  linkType: hard
+
+"multiformats@npm:^9.4.2":
+  version: 9.9.0
+  resolution: "multiformats@npm:9.9.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fmultiformats%2F-%2Fmultiformats-9.9.0.tgz"
+  checksum: d3e8c1be400c09a014f557ea02251a2710dbc9fca5aa32cc702ff29f636c5471e17979f30bdcb0a9cbb556f162a8591dc2e1219c24fc21394a56115b820bb84e
   languageName: node
   linkType: hard
 
@@ -3844,6 +4655,20 @@ __metadata:
   dependencies:
     node-gyp: latest
   checksum: 31fb22d674648204f8dd94167eb5aac896c841b84a9210d614bf5d97c74ef059cc6326389cf0c54d2086e35312938401d4cc82e5fcd679202503eb8ac84814f8
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:2.6.7":
+  version: 2.6.7
+  resolution: "node-fetch@npm:2.6.7::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fnode-fetch%2F-%2Fnode-fetch-2.6.7.tgz"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
   languageName: node
   linkType: hard
 
@@ -3978,6 +4803,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"on-exit-leak-free@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "on-exit-leak-free@npm:0.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fon-exit-leak-free%2F-%2Fon-exit-leak-free-0.2.0.tgz"
+  checksum: d22b0f0538069110626b578db6e68b6ee0e85b1ee9cc5ef9b4de1bba431431d6a8da91a61e09d2ad46f22a96f968e5237833cb9d0b69bc4d294f7ec82f609b05
+  languageName: node
+  linkType: hard
+
 "on-finished@npm:2.4.1":
   version: 2.4.1
   resolution: "on-finished@npm:2.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fon-finished%2F-%2Fon-finished-2.4.1.tgz"
@@ -4024,12 +4856,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-limit@npm:^2.2.0":
+  version: 2.3.0
+  resolution: "p-limit@npm:2.3.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fp-limit%2F-%2Fp-limit-2.3.0.tgz"
+  dependencies:
+    p-try: ^2.0.0
+  checksum: 84ff17f1a38126c3314e91ecfe56aecbf36430940e2873dadaa773ffe072dc23b7af8e46d4b6485d302a11673fe94c6b67ca2cfbb60c989848b02100d0594ac1
+  languageName: node
+  linkType: hard
+
 "p-limit@npm:^3.0.2":
   version: 3.1.0
   resolution: "p-limit@npm:3.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fp-limit%2F-%2Fp-limit-3.1.0.tgz"
   dependencies:
     yocto-queue: ^0.1.0
   checksum: 7c3690c4dbf62ef625671e20b7bdf1cbc9534e83352a2780f165b0d3ceba21907e77ad63401708145ca4e25bfc51636588d89a8c0aeb715e6c37d1c066430360
+  languageName: node
+  linkType: hard
+
+"p-locate@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "p-locate@npm:4.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fp-locate%2F-%2Fp-locate-4.1.0.tgz"
+  dependencies:
+    p-limit: ^2.2.0
+  checksum: 513bd14a455f5da4ebfcb819ef706c54adb09097703de6aeaa5d26fe5ea16df92b48d1ac45e01e3944ce1e6aa2a66f7f8894742b8c9d6e276e16cd2049a2b870
   languageName: node
   linkType: hard
 
@@ -4048,6 +4898,13 @@ __metadata:
   dependencies:
     aggregate-error: ^3.0.0
   checksum: cb0ab21ec0f32ddffd31dfc250e3afa61e103ef43d957cc45497afe37513634589316de4eb88abdfd969fe6410c22c0b93ab24328833b8eb1ccc087fc0442a1c
+  languageName: node
+  linkType: hard
+
+"p-try@npm:^2.0.0":
+  version: 2.2.0
+  resolution: "p-try@npm:2.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fp-try%2F-%2Fp-try-2.2.0.tgz"
+  checksum: f8a8e9a7693659383f06aec604ad5ead237c7a261c18048a6e1b5b85a5f8a067e469aa24f5bc009b991ea3b058a87f5065ef4176793a200d4917349881216cae
   languageName: node
   linkType: hard
 
@@ -4136,6 +4993,51 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pino-abstract-transport@npm:v0.5.0":
+  version: 0.5.0
+  resolution: "pino-abstract-transport@npm:0.5.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpino-abstract-transport%2F-%2Fpino-abstract-transport-0.5.0.tgz"
+  dependencies:
+    duplexify: ^4.1.2
+    split2: ^4.0.0
+  checksum: c503f867de3189f8217ab9cf794e8a631dddd0029a829f0f985f5511308152ebd53e363764fbc5570b3d1c715b341e3923456ce16ad84cd41be2b9a074ada234
+  languageName: node
+  linkType: hard
+
+"pino-std-serializers@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "pino-std-serializers@npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpino-std-serializers%2F-%2Fpino-std-serializers-4.0.0.tgz"
+  checksum: 89d487729b58c9d3273a0ee851ead068d6d2e2ccc1af8e1c1d28f1b3442423679bec7ec04d9a2aba36f94f335e82be9f4de19dc4fbc161e71c136aaa15b85ad3
+  languageName: node
+  linkType: hard
+
+"pino@npm:7.11.0":
+  version: 7.11.0
+  resolution: "pino@npm:7.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpino%2F-%2Fpino-7.11.0.tgz"
+  dependencies:
+    atomic-sleep: ^1.0.0
+    fast-redact: ^3.0.0
+    on-exit-leak-free: ^0.2.0
+    pino-abstract-transport: v0.5.0
+    pino-std-serializers: ^4.0.0
+    process-warning: ^1.0.0
+    quick-format-unescaped: ^4.0.3
+    real-require: ^0.1.0
+    safe-stable-stringify: ^2.1.0
+    sonic-boom: ^2.2.1
+    thread-stream: ^0.15.1
+  bin:
+    pino: bin.js
+  checksum: b919e7dbe41de978bb050dcef94fd687c012eb78d344a18f75f04ce180d5810fc162be1f136722d70cd005ed05832c4023a38b9acbc1076ae63c9f5ec5ca515c
+  languageName: node
+  linkType: hard
+
+"pngjs@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "pngjs@npm:5.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpngjs%2F-%2Fpngjs-5.0.0.tgz"
+  checksum: 04e912cc45fb9601564e2284efaf0c5d20d131d9b596244f8a6789fc6cdb6b18d2975a6bbf7a001858d7e159d5c5c5dd7b11592e97629b7137f7f5cef05904c8
+  languageName: node
+  linkType: hard
+
 "postcss-selector-parser@npm:^6.0.9":
   version: 6.0.11
   resolution: "postcss-selector-parser@npm:6.0.11::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpostcss-selector-parser%2F-%2Fpostcss-selector-parser-6.0.11.tgz"
@@ -4175,6 +5077,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"process-warning@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "process-warning@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fprocess-warning%2F-%2Fprocess-warning-1.0.0.tgz"
+  checksum: c708a03241deec3cabaeee39c4f9ee8c4d71f1c5ef9b746c8252cdb952a6059068cfcdaf348399775244cbc441b6ae5e26a9c87ed371f88335d84f26d19180f9
+  languageName: node
+  linkType: hard
+
 "process@npm:^0.11.10":
   version: 0.11.10
   resolution: "process@npm:0.11.10::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fprocess%2F-%2Fprocess-0.11.10.tgz"
@@ -4209,6 +5118,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-compare@npm:2.5.1":
+  version: 2.5.1
+  resolution: "proxy-compare@npm:2.5.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fproxy-compare%2F-%2Fproxy-compare-2.5.1.tgz"
+  checksum: c7cc151ac255150bcb24becde6495b3e399416c31991af377ce082255b51f07eaeb5d861bf8bf482703e92f88b90a5892ad57d3153ea29450d03ef921683d9fa
+  languageName: node
+  linkType: hard
+
 "psl@npm:^1.1.28":
   version: 1.9.0
   resolution: "psl@npm:1.9.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpsl%2F-%2Fpsl-1.9.0.tgz"
@@ -4240,6 +5156,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"qrcode@npm:1.5.3":
+  version: 1.5.3
+  resolution: "qrcode@npm:1.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fqrcode%2F-%2Fqrcode-1.5.3.tgz"
+  dependencies:
+    dijkstrajs: ^1.0.1
+    encode-utf8: ^1.0.3
+    pngjs: ^5.0.0
+    yargs: ^15.3.1
+  bin:
+    qrcode: bin/qrcode
+  checksum: 9a8a20a0a9cb1d15de8e7b3ffa214e8b6d2a8b07655f25bd1b1d77f4681488f84d7bae569870c0652872d829d5f8ac4922c27a6bd14c13f0e197bf07b28dead7
+  languageName: node
+  linkType: hard
+
 "qs@npm:6.11.0":
   version: 6.11.0
   resolution: "qs@npm:6.11.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fqs%2F-%2Fqs-6.11.0.tgz"
@@ -4253,6 +5183,18 @@ __metadata:
   version: 6.5.3
   resolution: "qs@npm:6.5.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fqs%2F-%2Fqs-6.5.3.tgz"
   checksum: 6f20bf08cabd90c458e50855559539a28d00b2f2e7dddcb66082b16a43188418cb3cb77cbd09268bcef6022935650f0534357b8af9eeb29bf0f27ccb17655692
+  languageName: node
+  linkType: hard
+
+"query-string@npm:7.1.3":
+  version: 7.1.3
+  resolution: "query-string@npm:7.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fquery-string%2F-%2Fquery-string-7.1.3.tgz"
+  dependencies:
+    decode-uri-component: ^0.2.2
+    filter-obj: ^1.1.0
+    split-on-first: ^1.0.0
+    strict-uri-encode: ^2.0.0
+  checksum: 91af02dcd9cc9227a052841d5c2eecb80a0d6489d05625df506a097ef1c59037cfb5e907f39b84643cbfd535c955abec3e553d0130a7b510120c37d06e0f4346
   languageName: node
   linkType: hard
 
@@ -4271,6 +5213,13 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fqueue-microtask%2F-%2Fqueue-microtask-1.2.3.tgz"
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
+  languageName: node
+  linkType: hard
+
+"quick-format-unescaped@npm:^4.0.3":
+  version: 4.0.4
+  resolution: "quick-format-unescaped@npm:4.0.4::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fquick-format-unescaped%2F-%2Fquick-format-unescaped-4.0.4.tgz"
+  checksum: 7bc32b99354a1aa46c089d2a82b63489961002bb1d654cee3e6d2d8778197b68c2d854fd23d8422436ee1fdfd0abaddc4d4da120afe700ade68bd357815b26fd
   languageName: node
   linkType: hard
 
@@ -4321,7 +5270,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^3.6.0":
+"readable-stream@npm:^3.1.1, readable-stream@npm:^3.6.0":
   version: 3.6.2
   resolution: "readable-stream@npm:3.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Freadable-stream%2F-%2Freadable-stream-3.6.2.tgz"
   dependencies:
@@ -4338,6 +5287,13 @@ __metadata:
   dependencies:
     picomatch: ^2.2.1
   checksum: 1ced032e6e45670b6d7352d71d21ce7edf7b9b928494dcaba6f11fba63180d9da6cd7061ebc34175ffda6ff529f481818c962952004d273178acd70f7059b320
+  languageName: node
+  linkType: hard
+
+"real-require@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "real-require@npm:0.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Freal-require%2F-%2Freal-require-0.1.0.tgz"
+  checksum: 96745583ed4f82cd5c6a6af012fd1d3c6fc2f13ae1bcff1a3c4f8094696013a1a07c82c5aa66a403d7d4f84949fc2203bc927c7ad120caad125941ca2d7e5e8e
   languageName: node
   linkType: hard
 
@@ -4366,6 +5322,20 @@ __metadata:
     tunnel-agent: ^0.6.0
     uuid: ^3.3.2
   checksum: 4e112c087f6eabe7327869da2417e9d28fcd0910419edd2eb17b6acfc4bfa1dad61954525949c228705805882d8a98a86a0ea12d7f739c01ee92af7062996983
+  languageName: node
+  linkType: hard
+
+"require-directory@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "require-directory@npm:2.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Frequire-directory%2F-%2Frequire-directory-2.1.1.tgz"
+  checksum: fb47e70bf0001fdeabdc0429d431863e9475e7e43ea5f94ad86503d918423c1543361cc5166d713eaa7029dd7a3d34775af04764bebff99ef413111a5af18c80
+  languageName: node
+  linkType: hard
+
+"require-main-filename@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "require-main-filename@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Frequire-main-filename%2F-%2Frequire-main-filename-2.0.0.tgz"
+  checksum: e9e294695fea08b076457e9ddff854e81bffbe248ed34c1eec348b7abbd22a0d02e8d75506559e2265e96978f3c4720bd77a6dad84755de8162b357eb6c778c7
   languageName: node
   linkType: hard
 
@@ -4472,6 +5442,20 @@ __metadata:
   version: 5.1.2
   resolution: "safe-buffer@npm:5.1.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsafe-buffer%2F-%2Fsafe-buffer-5.1.2.tgz"
   checksum: f2f1f7943ca44a594893a852894055cf619c1fbcb611237fc39e461ae751187e7baf4dc391a72125e0ac4fb2d8c5c0b3c71529622e6a58f46b960211e704903c
+  languageName: node
+  linkType: hard
+
+"safe-json-utils@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "safe-json-utils@npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsafe-json-utils%2F-%2Fsafe-json-utils-1.1.1.tgz"
+  checksum: f82a5833b7f6f25583c46520b3e158da3864d4f6f85b7cd68ec956ae7023395872e834d75f7f6216c109c546d10b6ee15c066d849f75ac2a7b86b8a041b4f01f
+  languageName: node
+  linkType: hard
+
+"safe-stable-stringify@npm:^2.1.0":
+  version: 2.4.3
+  resolution: "safe-stable-stringify@npm:2.4.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsafe-stable-stringify%2F-%2Fsafe-stable-stringify-2.4.3.tgz"
+  checksum: 3aeb64449706ee1f5ad2459fc99648b131d48e7a1fbb608d7c628020177512dc9d94108a5cb61bbc953985d313d0afea6566d243237743e02870490afef04b43
   languageName: node
   linkType: hard
 
@@ -4709,6 +5693,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sonic-boom@npm:^2.2.1":
+  version: 2.8.0
+  resolution: "sonic-boom@npm:2.8.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsonic-boom%2F-%2Fsonic-boom-2.8.0.tgz"
+  dependencies:
+    atomic-sleep: ^1.0.0
+  checksum: c7f9c89f931d7f60f8e0741551a729f0d81e6dc407a99420fc847a9a4c25af048a615b1188ab3c4f1fb3708fe4904973ddab6ebcc8ed5b78b50ab81a99045910
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsource-map-js%2F-%2Fsource-map-js-1.0.2.tgz"
@@ -4720,6 +5713,20 @@ __metadata:
   version: 0.6.1
   resolution: "source-map@npm:0.6.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsource-map%2F-%2Fsource-map-0.6.1.tgz"
   checksum: 59ce8640cf3f3124f64ac289012c2b8bd377c238e316fb323ea22fbfe83da07d81e000071d7242cad7a23cd91c7de98e4df8830ec3f133cb6133a5f6e9f67bc2
+  languageName: node
+  linkType: hard
+
+"split-on-first@npm:^1.0.0":
+  version: 1.1.0
+  resolution: "split-on-first@npm:1.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsplit-on-first%2F-%2Fsplit-on-first-1.1.0.tgz"
+  checksum: 16ff85b54ddcf17f9147210a4022529b343edbcbea4ce977c8f30e38408b8d6e0f25f92cd35b86a524d4797f455e29ab89eb8db787f3c10708e0b47ebf528d30
+  languageName: node
+  linkType: hard
+
+"split2@npm:^4.0.0":
+  version: 4.2.0
+  resolution: "split2@npm:4.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fsplit2%2F-%2Fsplit2-4.2.0.tgz"
+  checksum: 05d54102546549fe4d2455900699056580cca006c0275c334611420f854da30ac999230857a85fdd9914dc2109ae50f80fda43d2a445f2aa86eccdc1dfce779d
   languageName: node
   linkType: hard
 
@@ -4760,6 +5767,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stream-shift@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "stream-shift@npm:1.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fstream-shift%2F-%2Fstream-shift-1.0.1.tgz"
+  checksum: 59b82b44b29ec3699b5519a49b3cedcc6db58c72fb40c04e005525dfdcab1c75c4e0c180b923c380f204bed78211b9bad8faecc7b93dece4d004c3f6ec75737b
+  languageName: node
+  linkType: hard
+
 "strict-uri-encode@npm:^1.0.0":
   version: 1.1.0
   resolution: "strict-uri-encode@npm:1.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fstrict-uri-encode%2F-%2Fstrict-uri-encode-1.1.0.tgz"
@@ -4767,7 +5781,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"string-width@npm:^1.0.2 || 2 || 3 || 4, string-width@npm:^4.2.3":
+"strict-uri-encode@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "strict-uri-encode@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fstrict-uri-encode%2F-%2Fstrict-uri-encode-2.0.0.tgz"
+  checksum: eaac4cf978b6fbd480f1092cab8b233c9b949bcabfc9b598dd79a758f7243c28765ef7639c876fa72940dac687181b35486ea01ff7df3e65ce3848c64822c581
+  languageName: node
+  linkType: hard
+
+"string-width@npm:^1.0.2 || 2 || 3 || 4, string-width@npm:^4.1.0, string-width@npm:^4.2.0, string-width@npm:^4.2.3":
   version: 4.2.3
   resolution: "string-width@npm:4.2.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fstring-width%2F-%2Fstring-width-4.2.3.tgz"
   dependencies:
@@ -4787,7 +5808,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"strip-ansi@npm:^6.0.1":
+"strip-ansi@npm:^6.0.0, strip-ansi@npm:^6.0.1":
   version: 6.0.1
   resolution: "strip-ansi@npm:6.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fstrip-ansi%2F-%2Fstrip-ansi-6.0.1.tgz"
   dependencies:
@@ -4876,6 +5897,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"thread-stream@npm:^0.15.1":
+  version: 0.15.2
+  resolution: "thread-stream@npm:0.15.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fthread-stream%2F-%2Fthread-stream-0.15.2.tgz"
+  dependencies:
+    real-require: ^0.1.0
+  checksum: 0547795a8f357ba1ac0dba29c71f965182e29e21752951a04a7167515ee37524bfba6c410f31e65a01a8d3e5b93400b812889aa09523e38ce4d744c894ffa6c0
+  languageName: node
+  linkType: hard
+
 "timed-out@npm:^4.0.1":
   version: 4.0.1
   resolution: "timed-out@npm:4.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ftimed-out%2F-%2Ftimed-out-4.0.1.tgz"
@@ -4920,6 +5950,20 @@ __metadata:
   version: 0.0.3
   resolution: "tr46@npm:0.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ftr46%2F-%2Ftr46-0.0.3.tgz"
   checksum: 726321c5eaf41b5002e17ffbd1fb7245999a073e8979085dacd47c4b4e8068ff5777142fc6726d6ca1fd2ff16921b48788b87225cbc57c72636f6efa8efbffe3
+  languageName: node
+  linkType: hard
+
+"tslib@npm:1.14.1":
+  version: 1.14.1
+  resolution: "tslib@npm:1.14.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ftslib%2F-%2Ftslib-1.14.1.tgz"
+  checksum: dbe628ef87f66691d5d2959b3e41b9ca0045c3ee3c7c7b906cc1e328b39f199bb1ad9e671c39025bd56122ac57dfbf7385a94843b1cc07c60a4db74795829acd
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.3.1":
+  version: 2.6.2
+  resolution: "tslib@npm:2.6.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Ftslib%2F-%2Ftslib-2.6.2.tgz"
+  checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad
   languageName: node
   linkType: hard
 
@@ -4988,6 +6032,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uint8arrays@npm:^3.0.0, uint8arrays@npm:^3.1.0":
+  version: 3.1.1
+  resolution: "uint8arrays@npm:3.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fuint8arrays%2F-%2Fuint8arrays-3.1.1.tgz"
+  dependencies:
+    multiformats: ^9.4.2
+  checksum: b93b6c3f0a526b116799f3a3409bd4b5d5553eb3e73e485998ece7974742254fbc0d2f7988dd21ac86c4b974552f45d9ae9cf9cba9647e529f8eb1fdd2ed84d0
+  languageName: node
+  linkType: hard
+
 "ultron@npm:~1.1.0":
   version: 1.1.1
   resolution: "ultron@npm:1.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fultron%2F-%2Fultron-1.1.1.tgz"
@@ -5040,6 +6093,15 @@ __metadata:
   version: 1.0.0
   resolution: "url-set-query@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Furl-set-query%2F-%2Furl-set-query-1.0.0.tgz"
   checksum: 5ad73525e8f3ab55c6bf3ddc70a43912e65ff9ce655d7868fdcefdf79f509cfdddde4b07150797f76186f1a47c0ecd2b7bb3687df8f84757dee4110cf006e12d
+  languageName: node
+  linkType: hard
+
+"use-sync-external-store@npm:1.2.0":
+  version: 1.2.0
+  resolution: "use-sync-external-store@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fuse-sync-external-store%2F-%2Fuse-sync-external-store-1.2.0.tgz"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 5c639e0f8da3521d605f59ce5be9e094ca772bd44a4ce7322b055a6f58eeed8dda3c94cabd90c7a41fb6fa852210092008afe48f7038792fd47501f33299116a
   languageName: node
   linkType: hard
 
@@ -5105,6 +6167,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"valtio@npm:1.11.2":
+  version: 1.11.2
+  resolution: "valtio@npm:1.11.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fvaltio%2F-%2Fvaltio-1.11.2.tgz"
+  dependencies:
+    proxy-compare: 2.5.1
+    use-sync-external-store: 1.2.0
+  peerDependencies:
+    "@types/react": ">=16.8"
+    react: ">=16.8"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: cce2d9212aac9fc4bdeba2d381188cc831cfe8d2d03039024cfcd58ba1801f2a5b14d01c2bb21a2c9f12046d2ede64f1dd887175185f39bee553677a35592c30
+  languageName: node
+  linkType: hard
+
 "varint@npm:^5.0.0":
   version: 5.0.2
   resolution: "varint@npm:5.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fvarint%2F-%2Fvarint-5.0.2.tgz"
@@ -5167,7 +6247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-demi@npm:>=0.13.0, vue-demi@npm:>=0.14.0":
+"vue-demi@npm:>=0.13.0":
   version: 0.14.5
   resolution: "vue-demi@npm:0.14.5::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fvue-demi%2F-%2Fvue-demi-0.14.5.tgz"
   peerDependencies:
@@ -5180,6 +6260,22 @@ __metadata:
     vue-demi-fix: bin/vue-demi-fix.js
     vue-demi-switch: bin/vue-demi-switch.js
   checksum: ff44b9372b8224590514252a2f73363cced6062205f9628a6b130dccb80e2023d55cd9d1da94aeb68d5539b7ea9eedcecf88ab281a3a9ff48b8db4c5366b9643
+  languageName: node
+  linkType: hard
+
+"vue-demi@npm:>=0.14.5":
+  version: 0.14.6
+  resolution: "vue-demi@npm:0.14.6::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fvue-demi%2F-%2Fvue-demi-0.14.6.tgz"
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-rc.1
+    vue: ^3.0.0-0 || ^2.6.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  bin:
+    vue-demi-fix: bin/vue-demi-fix.js
+    vue-demi-switch: bin/vue-demi-switch.js
+  checksum: 424b1f340d5111fc4d4a0f8042c14ae836ba983bc968773a6d955d6846202d7e6f951993ac1525be8732b0cfe0c81d94ab88f427c97bfa86ead08db06491279b
   languageName: node
   linkType: hard
 
@@ -5540,6 +6636,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"which-module@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "which-module@npm:2.0.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fwhich-module%2F-%2Fwhich-module-2.0.1.tgz"
+  checksum: 1967b7ce17a2485544a4fdd9063599f0f773959cca24176dbe8f405e55472d748b7c549cd7920ff6abb8f1ab7db0b0f1b36de1a21c57a8ff741f4f1e792c52be
+  languageName: node
+  linkType: hard
+
 "which-typed-array@npm:^1.1.2":
   version: 1.1.9
   resolution: "which-typed-array@npm:1.1.9::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fwhich-typed-array%2F-%2Fwhich-typed-array-1.1.9.tgz"
@@ -5581,6 +6684,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"wrap-ansi@npm:^6.2.0":
+  version: 6.2.0
+  resolution: "wrap-ansi@npm:6.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fwrap-ansi%2F-%2Fwrap-ansi-6.2.0.tgz"
+  dependencies:
+    ansi-styles: ^4.0.0
+    string-width: ^4.1.0
+    strip-ansi: ^6.0.0
+  checksum: 6cd96a410161ff617b63581a08376f0cb9162375adeb7956e10c8cd397821f7eb2a6de24eb22a0b28401300bf228c86e50617cd568209b5f6775b93c97d2fe3a
+  languageName: node
+  linkType: hard
+
 "wrappy@npm:1":
   version: 1.0.2
   resolution: "wrappy@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fwrappy%2F-%2Fwrappy-1.0.2.tgz"
@@ -5596,6 +6710,21 @@ __metadata:
     safe-buffer: ~5.1.0
     ultron: ~1.1.0
   checksum: 20b7bf34bb88715b9e2d435b76088d770e063641e7ee697b07543815fabdb752335261c507a973955e823229d0af8549f39cc669825e5c8404aa0422615c81d9
+  languageName: node
+  linkType: hard
+
+"ws@npm:^7.5.1":
+  version: 7.5.9
+  resolution: "ws@npm:7.5.9::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fws%2F-%2Fws-7.5.9.tgz"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ^5.0.2
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: c3c100a181b731f40b7f2fddf004aa023f79d64f489706a28bc23ff88e87f6a64b3c6651fbec3a84a53960b75159574d7a7385709847a62ddb7ad6af76f49138
   languageName: node
   linkType: hard
 
@@ -5649,6 +6778,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"y18n@npm:^4.0.0":
+  version: 4.0.3
+  resolution: "y18n@npm:4.0.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fy18n%2F-%2Fy18n-4.0.3.tgz"
+  checksum: 014dfcd9b5f4105c3bb397c1c8c6429a9df004aa560964fb36732bfb999bfe83d45ae40aeda5b55d21b1ee53d8291580a32a756a443e064317953f08025b1aa4
+  languageName: node
+  linkType: hard
+
 "yaeti@npm:^0.0.6":
   version: 0.0.6
   resolution: "yaeti@npm:0.0.6::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyaeti%2F-%2Fyaeti-0.0.6.tgz"
@@ -5667,6 +6803,35 @@ __metadata:
   version: 4.0.0
   resolution: "yallist@npm:4.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyallist%2F-%2Fyallist-4.0.0.tgz"
   checksum: 343617202af32df2a15a3be36a5a8c0c8545208f3d3dfbc6bb7c3e3b7e8c6f8e7485432e4f3b88da3031a6e20afa7c711eded32ddfb122896ac5d914e75848d5
+  languageName: node
+  linkType: hard
+
+"yargs-parser@npm:^18.1.2":
+  version: 18.1.3
+  resolution: "yargs-parser@npm:18.1.3::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyargs-parser%2F-%2Fyargs-parser-18.1.3.tgz"
+  dependencies:
+    camelcase: ^5.0.0
+    decamelize: ^1.2.0
+  checksum: 60e8c7d1b85814594d3719300ecad4e6ae3796748b0926137bfec1f3042581b8646d67e83c6fc80a692ef08b8390f21ddcacb9464476c39bbdf52e34961dd4d9
+  languageName: node
+  linkType: hard
+
+"yargs@npm:^15.3.1":
+  version: 15.4.1
+  resolution: "yargs@npm:15.4.1::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fyargs%2F-%2Fyargs-15.4.1.tgz"
+  dependencies:
+    cliui: ^6.0.0
+    decamelize: ^1.2.0
+    find-up: ^4.1.0
+    get-caller-file: ^2.0.1
+    require-directory: ^2.1.1
+    require-main-filename: ^2.0.0
+    set-blocking: ^2.0.0
+    string-width: ^4.2.0
+    which-module: ^2.0.0
+    y18n: ^4.0.0
+    yargs-parser: ^18.1.2
+  checksum: 40b974f508d8aed28598087720e086ecd32a5fd3e945e95ea4457da04ee9bdb8bdd17fd91acff36dc5b7f0595a735929c514c40c402416bbb87c03f6fb782373
   languageName: node
   linkType: hard
 

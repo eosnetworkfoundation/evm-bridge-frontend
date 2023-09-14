@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@walletconnect/ethereum-provider": "^2.10.1",
+    "@walletconnect/modal": "^2.6.2",
     "bn.js": "^5.2.1",
     "bootstrap": "^5.3.0",
-    "bootstrap-vue-next": "^0.9.4",
+    "bootstrap-vue-next": "^0.12.3",
     "clipboard.js": "^1.0.1",
     "enf-eosjs": "^23.0.0",
     "events": "^3.3.0",

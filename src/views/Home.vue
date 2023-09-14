@@ -1,5 +1,18 @@
 <template>
   <div class="home container">
+    <div v-if="modalSelectConnection" style="display: block; position: absolute; z-index: 10; top: 0; left: 0; height:100%;width:100%; background-color: rgba(0,0,0,.5);">
+
+      <b-card title="Select A Way to Connect" style="width: 90vw; max-width:400px; margin:0 auto; margin-top:30vh">
+        <div style="display: flex; justify-content: space-around;">
+        <b-button class="connect-btn" variant="primary" @click="connectWalletImpl(true)" :disabled="wallet.connecting">
+          Metamask
+        </b-button>
+        <b-button class="connect-btn" variant="primary" @click="connectWalletImpl(false)" :disabled="wallet.connecting">
+          Wallet Connect
+        </b-button>
+      </div>
+      </b-card>
+    </div>
     <b-tabs class="no-fade" nav-class="nav-tabs-card">
       <b-tab :title="$t('home.withdraw')">
         <div class="withdraw" id="withdraw">
@@ -16,7 +29,7 @@
                       <input type="search" id="from" class="form-control" v-model="address" maxlength="42" disabled>
                     </div>
                     <div class="col col-auto">
-                      <b-button class="connect-btn" variant="primary" @click="connectWallet()"
+                      <b-button class="connect-btn" variant="primary" @click="connectWallet"
                         :disabled="wallet.connecting">
                         <span v-if="wallet.connected">{{ $t('home.connected') }}</span>
                         <span v-else-if="wallet.connecting">{{ $t('home.connecting') }}</span>
@@ -38,29 +51,35 @@
                     <div class="text-danger" v-if="exceeded">{{ $t('home.insufficient') }}</div>
                   </div>
                   <div class="col-auto">
-                    <div  class="connect-btn" >
+                    <div class="connect-btn">
                       <b-dropdown variant="outline-secondary" style="height:auto; width:100%;">
-                      <template #button-content >
-                        <div class="my_dropdown-toggle">
-                          <div v-if="tokenName==='EOS'" style="display: inline-block;">
-                            <img src="../assets/eos.png" alt="LOGO-EOS" style="margin-right:5px; height:25px; width:25px;object-fit:contain;" draggable="false">EOS
+                        <template #button-content>
+                          <div class="my_dropdown-toggle">
+                            <div v-if="tokenName === 'EOS'" style="display: inline-block;">
+                              <img src="../assets/eos.png" alt="LOGO-EOS"
+                                style="margin-right:5px; height:25px; width:25px;object-fit:contain;"
+                                draggable="false">EOS
+                            </div>
+                            <div v-else-if="tokenName === 'USDT'" style="display: inline-block;">
+                              <img src="../assets/usdt.png" alt="LOGO-USDT"
+                                style="margin-right:5px; height:25px; width:25px;object-fit:contain;"
+                                draggable="false">USDT
+                            </div>
+                            <div v-else>
+                              Error!
+                            </div>
                           </div>
-                          <div v-else-if="tokenName==='USDT'" style="display: inline-block;">
-                            <img src="../assets/usdt.png" alt="LOGO-USDT" style="margin-right:5px; height:25px; width:25px;object-fit:contain;" draggable="false">USDT
-                          </div>
-                          <div v-else>
-                            Error!
-                          </div>
-                        </div>
-                        
-                      </template>
-                      <b-dropdown-item @click="onSelectToken('EOS')">
-                        <img src="../assets/eos.png" alt="LOGO-EOS" style="margin-right:5px; height:25px; width:25px;object-fit:contain;" draggable="false">EOS
-                      </b-dropdown-item>
-                      <b-dropdown-item @click="onSelectToken('USDT')" :disabled="erc20_contract == null">
-                        <img src="../assets/usdt.png" alt="LOGO-USDT" style="margin-right:5px; height:25px; width:25px;object-fit:contain;" draggable="false">USDT
-                      </b-dropdown-item>
-                    </b-dropdown>
+
+                        </template>
+                        <b-dropdown-item @click="onSelectToken('EOS')">
+                          <img src="../assets/eos.png" alt="LOGO-EOS"
+                            style="margin-right:5px; height:25px; width:25px;object-fit:contain;" draggable="false">EOS
+                        </b-dropdown-item>
+                        <b-dropdown-item @click="onSelectToken('USDT')" :disabled="erc20_contract == null">
+                          <img src="../assets/usdt.png" alt="LOGO-USDT"
+                            style="margin-right:5px; height:25px; width:25px;object-fit:contain;" draggable="false">USDT
+                        </b-dropdown-item>
+                      </b-dropdown>
                     </div>
                   </div>
                 </div>
@@ -232,6 +251,8 @@ import clipboardCopy from '../utils/copy-text'
 import erc20_abi from '../erc20.json'
 
 import { Api, JsonRpc, RpcError } from 'enf-eosjs';
+import { EthereumProvider } from '@walletconnect/ethereum-provider';
+import { ref } from 'vue'
 
 
 const rpc = new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch });
@@ -262,29 +283,25 @@ export default {
       tokenName: 'EOS',
       erc20_addr: '',
       erc20_contract: null,
+      walletConnectProvider: null,
+      modalSelectConnection: ref(false),
     }
   },
-  created() {
+  async created() {
     this.wallet.connect = this.connectWallet
 
-    this.web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('http://localhost:8545'))
-
-    this.web3.eth.getAccounts().then(async results => {
-
-      if (results && results.length) {
-        this.address = results[0]
-        this.wallet.address = this.address
-        this.getBalance()
-        await this.checkChainID()
-        let context = this;
-        Web3.givenProvider.on('accountsChanged', function (accounts) {
-          context.address = Web3.utils.toChecksumAddress(accounts[0])
-          context.wallet.address = context.address
-          context.getBalance()
-        })
-        Web3.givenProvider.on('chainChanged', (_chainId) => window.location.reload());
-      }
+    this.walletConnectProvider = await EthereumProvider.init({
+      projectId: "12d2503c58f46ada41000bde1e0d0b7a", // REQUIRED your projectId
+      chains: [0x3CC5], // REQUIRED chain ids
+      showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
+      methods: [
+        "eth_sendTransaction",
+      ], // REQUIRED ethereum methods
+      events: ["chainChanged", "accountsChanged"], // REQUIRED ethereum events
     })
+
+
+
   },
   watch: {
     amount(val) {
@@ -364,7 +381,6 @@ export default {
       if (this.erc20_addr != "") {
         this.erc20_contract = new this.web3.eth.Contract(erc20_abi, this.erc20_addr);
       }
-        
       console.log(chainId)
       if (chainId != targetChainid) {
         try {
@@ -410,20 +426,43 @@ export default {
       }
     },
 
-    async connectWallet() {
+    async connectWalletImpl(isMetamask) {
       try {
         this.wallet.connecting = true
+        this.modalSelectConnection = false;
+        if (!isMetamask) {
+          await this.walletConnectProvider.connect();
+        }
+        this.web3 = new Web3(isMetamask ? Web3.givenProvider : this.walletConnectProvider);
         let results = await this.web3.eth.getAccounts()
-        if (!results.length) {
+
+        if (!results || !results.length) {
           results = await this.web3.eth.requestAccounts()
         }
-        this.address = results[0]
-        this.wallet.address = this.address
-        await this.checkChainID()
-        this.getBalance()
+        if (results && results.length) {
+          this.address = results[0]
+          this.wallet.address = this.address
+          this.getBalance()
+          await this.checkChainID()
+          let context = this;
+          Web3.givenProvider.on('accountsChanged', function (accounts) {
+            context.address = Web3.utils.toChecksumAddress(accounts[0])
+            context.wallet.address = context.address
+            context.getBalance()
+          })
+          Web3.givenProvider.on('chainChanged', (_chainId) => window.location.reload());
+        }
+
       } finally {
+        if (!this.web3) {
+          this.modalSelectConnection = true;
+        }
         this.wallet.connecting = false
       }
+    },
+    connectWallet() {
+
+      this.modalSelectConnection = true;
     },
     async getBalance() {
       try {
@@ -447,12 +486,12 @@ export default {
 
     onSelectToken(token) {
       if (token === "EOS" || token === "USDT") {
-        if (token == "USDT" && this.erc20_contract == null ) {
+        if (token == "USDT" && this.erc20_contract == null) {
           return;
         }
         this.tokenName = token
         this.getBalance()
-      } 
+      }
     },
 
     stringToUTF8Bytes(string) {
@@ -477,7 +516,7 @@ export default {
     },
 
     async prepareTx(gaslimit) {
-      
+
       if (this.tokenName === 'EOS') {
         let tx = {
           from: this.address,
@@ -491,8 +530,8 @@ export default {
           tx.gas = gaslimit;
         }
         return tx
-      } 
-      else if (this.tokenName === 'USDT'){
+      }
+      else if (this.tokenName === 'USDT') {
         // USDT
         const fee = await this.erc20_contract.methods.egressFee().call()
         let tx = {
@@ -510,7 +549,7 @@ export default {
       }
 
       return {}
-      
+
     },
 
     async transfer() {
@@ -730,13 +769,13 @@ export default {
 }
 
 .my_dropdown-toggle::after {
-    display: inline-block;
-    margin-left: 0.255em;
-    vertical-align: 0.255em;
-    content: "";
-    border-top: 0.3em solid;
-    border-right: 0.3em solid transparent;
-    border-bottom: 0;
-    border-left: 0.3em solid transparent;
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
 }
 </style>
