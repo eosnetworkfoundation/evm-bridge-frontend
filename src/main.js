@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import App from './App.vue'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue-next'
@@ -16,6 +16,14 @@ app.use(BootstrapVue)
 app.use(i18n)
 app.use(router)
 app.use(alertPlugin)
+
+const wallet = reactive({
+    connected: false,
+    connecting: false,
+    connect: null
+  })
+app.provide('wallet', wallet)
+
 
 app.component('Fa', Fa)
 app.provide('env', location.host === 'bridge.evm.eosnetwork.com' ? 'MAINNET' : 'TESTNET')

@@ -1,15 +1,12 @@
 <script setup>
 import { provide, reactive, ref, inject } from 'vue'
 import { RouterView } from 'vue-router'
+import { createWeb3Modal, defaultWagmiConfig, useWeb3Modal } from '@web3modal/wagmi/vue'
+import { eos, eosTestnet } from 'viem/chains'
+
 
 var env = location.host === 'bridge.evm.eosnetwork.com' ? 'MAINNET' : 'TESTNET'
 const i18n = inject('i18n')
-const wallet = reactive({
-  connected: false,
-  connecting: false,
-  connect: null
-})
-provide('wallet', wallet)
 
 const networks = {
   "Testnet": 'https://bridge.testnet.evm.eosnetwork.com',
@@ -26,6 +23,16 @@ const selectLang = (val) => {
   i18n.global.locale.value = val
   localStorage.locale = val
 }
+  // 1. Get projectId
+  const projectId = '12d2503c58f46ada41000bde1e0d0b7a'
+
+  // 2. Create wagmiConfig
+  const chains = [eos, eosTestnet]
+  const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' })
+
+  // 3. Create modal
+  createWeb3Modal({ wagmiConfig, projectId, chains })
+
 </script>
 
 <template>
@@ -47,14 +54,7 @@ const selectLang = (val) => {
             </template>
             <b-dropdown-item @click="selectLang(k)" v-for="(v, k) in langs" :key="k">{{v}}</b-dropdown-item>
           </b-nav-item-dropdown>
-          <span class="address" style="line-height: 40px;" v-if="wallet.address">
-            {{ wallet.address.slice(0, 6) + '...' + wallet.address.slice(-4) }}
-          </span>
-          <b-nav-item class="connect-btn d-none d-sm-block" @click="wallet.connect()" v-else>
-            <span v-if="wallet.connected">{{$t('home.connected')}}</span>
-            <span v-else-if="wallet.connecting">{{$t('home.connecting')}}</span>
-            <span v-else>{{$t('home.connectWallet')}}</span>
-          </b-nav-item>
+          <w3m-button balance="false" />
         </b-navbar-nav>
       </b-navbar>
     </div>
@@ -107,6 +107,17 @@ const selectLang = (val) => {
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  name: 'app',
+  inject: ['wallet', 'env'],
+  mounted() {
+    this.wallet.connect = useWeb3Modal()
+  },
+}
+
+</script>
 
 <style scoped lang="scss">
 
