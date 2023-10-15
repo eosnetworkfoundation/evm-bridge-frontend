@@ -229,17 +229,17 @@ import BN from 'bn.js'
 import clipboardCopy from '../utils/copy-text'
 import erc20_abi from '../erc20.json'
 
-import { Api, JsonRpc, RpcError } from 'enf-eosjs';
+import { JsonRpc, RpcError } from 'enf-eosjs';
 
 
-const rpc = new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch });
-const api = new Api({ rpc, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() });
+
 
 export default {
   name: 'home',
   inject: ['wallet', 'env'],
   data() {
     return {
+      rpc: null,
       address: '',
       balance: '',
       memo: '',
@@ -274,7 +274,7 @@ export default {
   },
   created() {
 
-
+    this.rpc = (this.env === "TESTNET" ? new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch }) : new JsonRpc('https://eos.api.eosnation.io:443', { fetch }));
     this.wallet.connect = this.connectWallet
 
     this.web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('http://localhost:8545'))
@@ -558,7 +558,7 @@ export default {
           var hash = blockinfo.mixHash.slice(2)
 
           // Fetch EOS block, we do not use the function provided by the package as it miss fields in the return value.
-          var r = await rpc.fetch('/v1/chain/get_block', { block_num_or_id: hash })
+          var r = await vm.rpc.fetch('/v1/chain/get_block', { block_num_or_id: hash })
           // EOS tx id is the result.transactions.trx.id
           // EVM tx is in eos_block.transactions.trx.transaction.actions[n]
           // There should be only one action in each eos transaction for those EVM transactions.
@@ -579,7 +579,7 @@ export default {
           // but for the frontend display, hardcoded two queries should be fine. 
           // We can make the logic more general and more robust if necessary.
           if (txs.length == 0) {
-            var r2 = await rpc.fetch('/v1/chain/get_block', { block_num_or_id: r.previous })
+            var r2 = await vm.rpc.fetch('/v1/chain/get_block', { block_num_or_id: r.previous })
 
             txs = r2.transactions.map((t) => {
               if (t.trx.transaction != undefined) {
