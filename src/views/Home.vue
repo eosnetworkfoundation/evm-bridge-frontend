@@ -265,7 +265,7 @@ export default {
         blockList:  ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos'], 
         warningList: ['huobideposit', 'okbtothemoon', 'gateiowallet', 'coinbasebase', 'krakenkraken'] 
       },
-        { name: 'USDT', addr: '0x4ea3b729669bF6C34F7B80E5D6c17DB71F89F21F', logo: 'images/usdt.png' , 
+        { name: 'USDT', addr: '0x33B57dC70014FD7AA6e1ed3080eeD2B619632B8e', logo: 'images/usdt.png' , 
         blockList:  ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'], 
         warningList: ['gateiowallet'] 
       },
