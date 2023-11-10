@@ -1,15 +1,13 @@
 <script setup>
-import { provide, reactive, ref, inject } from 'vue'
+import { provide, reactive, ref, inject, watch } from 'vue'
 import { RouterView } from 'vue-router'
+import { createWeb3Modal, defaultWagmiConfig, useWeb3Modal, useWeb3ModalEvents } from '@web3modal/wagmi/vue'
+import { eos, eosTestnet } from 'viem/chains'
+
+
 
 const env = inject('env')
 const i18n = inject('i18n')
-const wallet = reactive({
-  connected: false,
-  connecting: false,
-  connect: null
-})
-provide('wallet', wallet)
 
 const networks = {
   "Testnet": 'https://bridge.testnet.evm.eosnetwork.com',
@@ -19,17 +17,53 @@ const lang = ref(i18n.global.locale.value || 'en')
 const langs = {
   en: 'English',
   ko: '한국인',
-  zh: '中文'
+  zh: '简体中文'
 }
 const selectLang = (val) => {
   lang.value = val
   i18n.global.locale.value = val
   localStorage.locale = val
 }
+  // 1. Get projectId
+  const projectId = '12d2503c58f46ada41000bde1e0d0b7a'
+
+  // 2. Create wagmiConfig
+  const chains = [env === 'MAINNET' ? eos : eosTestnet]
+  const wagmiConfig = defaultWagmiConfig({ chains, projectId, appName: 'Web3Modal' ,
+  metadata: {
+    name: 'EOS EVM',
+    description: 'EOS EVM',
+    url: 'https://eosnetwork.com',
+    icons: ['https://bridge.evm.eosnetwork.com/images/eos.png']
+  },
+  rpcUrl: env === 'MAINNET' ? 'https://api.evm.eosnetwork.com' : 'https://api.testnet.evm.eosnetwork.com',
+})
+
+  // 3. Create modal
+  createWeb3Modal({ wagmiConfig, projectId, chains ,
+    chainImages: {
+    15557: '/images/eos.png',
+    17777: '/images/eos.png',
+  },
+  themeMode: 'light',
+    themeVariables: {
+    //'--w3m-color-mix': '#00BB7F',
+    //'--w3m-color-mix-strength': 40,
+    '--w3m-font-family': '"sfmoma", sans-serif',
+    '--w3m-accent':'#1E94E6',
+    //'--w3m-font-size-master':,
+    '--w3m-border-radius-master':'1px',
+    //'--w3m-z-index':,
+
+  }
+})
+
+  
 </script>
 
 <template>
   <header>
+    
     <div class="container">
       <b-navbar dark toggleable="sm">
         <a class="navbar-brand" href="">
@@ -50,19 +84,14 @@ const selectLang = (val) => {
             </template>
             <b-dropdown-item @click="selectLang(k)" v-for="(v, k) in langs" :key="k">{{v}}</b-dropdown-item>
           </b-nav-item-dropdown>
-          <span class="address" style="line-height: 40px;" v-if="wallet.address">
-            {{ wallet.address.slice(0, 6) + '...' + wallet.address.slice(-4) }}
-          </span>
-          <b-nav-item class="connect-btn d-none d-sm-block" @click="wallet.connect()" v-else>
-            <span v-if="wallet.connected">{{$t('home.connected')}}</span>
-            <span v-else-if="wallet.connecting">{{$t('home.connecting')}}</span>
-            <span v-else>{{$t('home.connectWallet')}}</span>
-          </b-nav-item>
+          <w3m-button balance="hide"/>
         </b-navbar-nav>
       </b-navbar>
     </div>
   </header>
-
+  <BModal v-model="missingNetworkModal" okOnly="true"  :okTitle="$t('app.walletconnect.failedswitch.ok')" :title="$t('app.walletconnect.failedswitch.title')"> 
+    <div v-html="$t('app.walletconnect.failedswitch.content', { 'interpolation': {'escapeValue': false} })"></div>
+  </BModal>
   <RouterView class="main"/>
 
   <footer>
@@ -110,6 +139,26 @@ const selectLang = (val) => {
     </div>
   </footer>
 </template>
+
+<script>
+const missingNetworkModal = ref(false)
+export default {
+  name: 'app',
+  inject: ['wallet', 'env'],
+  mounted() {
+    this.wallet.connect = useWeb3Modal()
+    const events = useWeb3ModalEvents();
+    
+    watch(events, async (newVal,oldVal)=> {
+      if (newVal.data.event == 'CONNECT_ERROR' && newVal.data.properties.message == 'Requested chains are not supported') {
+        missingNetworkModal.value = true;
+      }
+    });
+
+  },
+}
+
+</script>
 
 <style scoped lang="scss">
 

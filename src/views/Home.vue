@@ -16,12 +16,13 @@
                       <input type="search" id="from" class="form-control" v-model="address" maxlength="42" disabled>
                     </div>
                     <div class="col col-auto">
-                      <b-button class="connect-btn" variant="primary" @click="connectWallet()"
+                      <b-button class="connect-btn" variant="primary" @click="wallet.connect.open()"
                         :disabled="wallet.connecting">
                         <span v-if="wallet.connected">{{ $t('home.connected') }}</span>
                         <span v-else-if="wallet.connecting">{{ $t('home.connecting') }}</span>
                         <span v-else>{{ $t('home.connectWallet') }}</span>
                       </b-button>
+
                     </div>
                   </div>
                 </div>
@@ -29,8 +30,7 @@
                 <div class="row align-items-center">
                   <div class="col">
                     <label for="amount">{{ $t('home.amount') }}</label>
-                    <input type="number" id="amount" class="form-control" min="0" :max="balance"
-                      :disabled="!wallet.connected" v-model="amount">
+                    <input type="number" id="amount" class="form-control" min="0" :max="balance" v-model="amount">
                     <div class="form-text">
                       {{ $t('home.myBalance') }}
                       <span id="balance" v-if="balance">{{ balance }}</span>
@@ -190,7 +190,7 @@
                 <div class="form-text">
                   {{ $t('home.addressTitle') }}<br>
                   <i18n-t keypath="home.addressDesc" v-if="!address">
-                    <b-link @click="connectWallet" :disabled="wallet.connecting">
+                    <b-link @click="wallet.connect.open()" :disabled="wallet.connecting">
                       <fa icon="spinner" spin v-if="wallet.connecting" />
                       {{ $t('home.connectEvmWallet') }}
                     </b-link>
@@ -231,6 +231,9 @@ import erc20_abi from '../erc20.json'
 
 import { JsonRpc, RpcError } from 'enf-eosjs';
 
+
+import { getAccount, fetchBalance, getContract, fetchFeeData, sendTransaction, getPublicClient, getWalletClient, fetchTransaction, waitForTransaction, writeContract, disconnect, watchAccount, watchNetwork, switchNetwork, getNetwork } from '@wagmi/core'
+import { compileScript } from 'vue/compiler-sfc';
 
 
 
@@ -275,34 +278,35 @@ export default {
   created() {
 
     this.rpc = (this.env === "TESTNET" ? new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch }) : new JsonRpc('https://eos.api.eosnation.io:443', { fetch }));
-    this.wallet.connect = this.connectWallet
+    // this.wallet.connect = this.connectWallet
 
-    this.web3 = new Web3(Web3.givenProvider || new Web3.providers.HttpProvider('http://localhost:8545'))
 
     this.tokenList = this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet;
     this.selectedToken = 0;
+
     for (var item of this.tokenList) {
       if (item.addr != '') {
-        item.erc20_contract = new this.web3.eth.Contract(erc20_abi, item.addr);
+        item.erc20_contract = getContract({
+          address: item.addr,
+          abi: erc20_abi,
+        })
       }
     }
+    const account = getAccount()
+    watchAccount((account) => {
+      this.address = account.address
+      this.wallet.connected = account.isConnected;
 
-    this.web3.eth.getAccounts().then(async results => {
 
-      if (results && results.length) {
-        this.address = results[0]
-        this.wallet.address = this.address
-        this.getBalance()
-        await this.checkChainID()
-        let context = this;
-        Web3.givenProvider.on('accountsChanged', function (accounts) {
-          context.address = Web3.utils.toChecksumAddress(accounts[0])
-          context.wallet.address = context.address
-          context.getBalance()
-        })
-        Web3.givenProvider.on('chainChanged', (_chainId) => window.location.reload());
-      }
+      this.getBalance()
     })
+
+    watchNetwork((network) => this.checkChainID(network))
+
+    if (account.isConnected) {
+      this.address = account.address
+      this.getBalance()
+    }
   },
   watch: {
     amount(val) {
@@ -341,10 +345,10 @@ export default {
       }
       try {
         if (this.tokenName() == "EOS") {
-          return this.web3.utils.toBN(this.web3.utils.toWei(this.amount.toString(), 'ether'))
+          return Web3.utils.toBN(Web3.utils.toWei(this.amount.toString(), 'ether')).toString()
         }
         else {
-          return this.web3.utils.toBN(this.web3.utils.toWei(this.amount.toString(), 'mwei'))
+          return Web3.utils.toBN(Web3.utils.toWei(this.amount.toString(), 'mwei')).toString()
         }
       } catch (err) {
         return null
@@ -352,7 +356,7 @@ export default {
     },
     transferFee() {
       if (this.gas && this.gasPrice) {
-        return this.web3.utils.fromWei(this.gasPrice) * this.gas
+        return Web3.utils.fromWei(this.gasPrice) * this.gas
       }
       return 0
     },
@@ -369,106 +373,54 @@ export default {
     blockList() { return this.tokenList[this.selectedToken].blockList; },
     warningList() { return this.tokenList[this.selectedToken].warningList; },
 
-    async calcFee() {
-      if (this.disableTransfer) {
-        return
-      }
-      this.gasPrice = await this.web3.eth.getGasPrice()
-      this.gas = await this.web3.eth.estimateGas(await this.prepareTx(null));
+    async getPrice() {
+
+      const feeData = await fetchFeeData({
+        formatUnits: 'wei',
+      })
+
+      this.gasPrice = new BN(feeData.formatted.gasPrice)
+
     },
 
-    async checkChainID() {
-      let chainId = await this.web3.eth.getChainId()
+    async checkChainID(network) {
+      if (!network || !network.chain) {
+        return
+      }
       let targetChainid = (this.env === "TESTNET" ? 15557 : 17777);
-      let targetChainidHEX = (this.env === "TESTNET" ? "0x3CC5" : "0x4571");
-      let targetApiAddr = (this.env === "TESTNET" ? "https://api.testnet.evm.eosnetwork.com/" : "https://api.evm.eosnetwork.com/");
-      let targetExplorerAddr = (this.env === "TESTNET" ? "https://explorer.testnet.evm.eosnetwork.com" : "https://explorer.evm.eosnetwork.com");
-      let targetNetworkName = (this.env === "TESTNET" ? "EOS-EVM Testnet2" : "EOS-EVM");
-
-
-
-      console.log(chainId)
-      if (chainId != targetChainid) {
-        try {
-          window.alert(this.$t('home.swtichNetPrompt'))
-          await Web3.givenProvider.request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: targetChainidHEX }],
-          });
-
-        } catch (switchError) {
-
-          // The network has not been added to MetaMask
-          if (switchError.code === 4902) {
-
-            if (window.confirm(this.$t('home.addNetPrompt'))) {
-              await Web3.givenProvider.request({
-                method: 'wallet_addEthereumChain',
-                params: [{
-                  chainId: targetChainidHEX,
-                  chainName: targetNetworkName,
-                  nativeCurrency: {
-                    name: 'EOS',
-                    symbol: 'EOS',
-                    decimals: 18
-                  },
-                  rpcUrls: [targetApiAddr],
-                  blockExplorerUrls: [targetExplorerAddr]
-                }]
-              })
-
-              await Web3.givenProvider.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: targetChainidHEX }],
-              });
-
-            }
-
-          }
-          console.log("Cannot switch to the network.")
-          console.log(switchError)
-
-        }
+      if (network.chain.id != targetChainid) {
+        window.alert(this.$t('home.swtichNetPrompt'))
+        switchNetwork({ chainId: targetChainid }).then((r) => {
+          window.location.reload()
+        })
       }
     },
 
     async connectWallet() {
-      try {
-        this.wallet.connecting = true
-        let results = await this.web3.eth.getAccounts()
-        if (!results.length) {
-          results = await this.web3.eth.requestAccounts()
-        }
-        this.address = results[0]
-        this.wallet.address = this.address
-        await this.checkChainID()
-        this.getBalance()
-      } finally {
-        this.wallet.connecting = false
-      }
+
     },
     async getBalance() {
-      try {
-        const address = this.address
-        this.wallet.connecting = true
-        this.wallet.connected = false
-        if (this.tokenName() === 'EOS') {
-          const wei = await this.web3.eth.getBalance(address)
-          this.balance = this.web3.utils.fromWei(wei, 'ether')
-        }
-        else {
-          if ((this.erc20_contract())) {
-            const wei = await this.erc20_contract().methods.balanceOf(address).call()
-            this.balance = this.web3.utils.fromWei(wei, 'mwei')
-          }
-          else { this.balance = null; }
 
-        }
-
-        this.wallet.connected = true
-      } finally {
-        this.wallet.connecting = false
+      const address = this.address
+      if (!address) {
+        return
       }
+      if (this.tokenName() === 'EOS') {
+        const bal = await fetchBalance({
+          address,
+          formatUnits: 'wei',
+        })
+        const wei = new BN(bal.formatted)
+        this.balance = Web3.utils.fromWei(wei, 'ether')
+      }
+      else {
+        if ((this.erc20_contract())) {
+          const wei = new BN((await this.erc20_contract().read.balanceOf([address])).toString())
+          this.balance = Web3.utils.fromWei(wei, 'mwei')
+        }
+        else { this.balance = null; }
+      }
+
     },
 
     onSelectToken(index) {
@@ -497,43 +449,6 @@ export default {
       return targetExplorerAddr + '/tx/' + tx
     },
 
-    async prepareTx(gaslimit) {
-
-      if (this.tokenName() === 'EOS') {
-        let tx = {
-          from: this.address,
-          to: this.addressEvm,
-          value: this.transferValue,
-          gasPrice: this.gasPrice,
-          data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
-        }
-
-        if (gaslimit != null) {
-          tx.gas = gaslimit;
-        }
-        return tx
-      }
-      else {
-        // USDT
-        const fee = await this.erc20_contract().methods.egressFee().call()
-        let tx = {
-          from: this.address,
-          to: this.erc20_addr(),
-          value: fee,
-          gasPrice: this.gasPrice,
-          data: this.erc20_contract().methods.bridgeTransfer(this.addressEvm, this.transferValue, this.memo).encodeABI(),
-        }
-
-        if (gaslimit != null) {
-          tx.gas = gaslimit;
-        }
-        return tx
-      }
-
-      return {}
-
-    },
-
     async transfer() {
       try {
         this.submitting = true
@@ -541,65 +456,86 @@ export default {
         if (!window.confirm(this.$t('home.transferConfirm', [this.amount, this.tokenName(), this.targetAddress]))) {
           return
         }
-        this.gasPrice = await this.web3.eth.getGasPrice();
-        this.gas = await this.web3.eth.estimateGas(await this.prepareTx(null));
 
         var vm = this
 
-        // Send EVM Transaction
-        await this.web3.eth.sendTransaction(await this.prepareTx(this.gas)).on('receipt', async function (receipt) {
-          // Receipt contains tx hash.
-          vm.transactionHash = receipt.transactionHash
-          vm.eosHash = ''
-          // Get block containing the tx/
-          const blockinfo = await vm.web3.eth.getBlock(receipt.blockHash)
+        let tx = null;
+        
+        await this.getPrice()
 
-          // Eos block hash is in the mixHash field of the evm block header.
-          var hash = blockinfo.mixHash.slice(2)
+        if (this.tokenName() === 'EOS') {
+          tx = await sendTransaction({
+            from: this.address,
+            to: this.addressEvm,
+            value: this.transferValue,
+            gasPrice: this.gasPrice,
+            data: this.bytesToHex(this.stringToUTF8Bytes(this.memo)),
+          })
+        }
+        else {
+          // USDT
+          const fee = (await this.erc20_contract().read.egressFee()).toString()
 
-          // Fetch EOS block, we do not use the function provided by the package as it miss fields in the return value.
-          var r = await vm.rpc.fetch('/v1/chain/get_block', { block_num_or_id: hash })
-          // EOS tx id is the result.transactions.trx.id
-          // EVM tx is in eos_block.transactions.trx.transaction.actions[n]
-          // There should be only one action in each eos transaction for those EVM transactions.
-          // We can filter the action by action.account === 'eosio.evm' and locate the rlptx of the EVM tx in action.data.rlptx
-          // EVM tx hash = keccak256(rlptx)
-          var txs = r.transactions.map((t) => {
+          tx = await writeContract({
+            address: this.erc20_addr(),
+            abi: erc20_abi,
+            functionName: 'bridgeTransfer',
+            args: [this.addressEvm, this.transferValue, this.memo],
+            value: fee
+          })
+
+        }
+        const receipt = await waitForTransaction({
+          confirmations: 1,
+          hash: tx.hash,
+        })
+        vm.transactionHash = receipt.transactionHash
+        const blockinfo = await getPublicClient().getBlock({ blockHash: receipt.blockHash })
+
+        var hash = blockinfo.mixHash.slice(2)
+
+        // Fetch EOS block, we do not use the function provided by the package as it miss fields in the return value.
+        var r = await vm.rpc.fetch('/v1/chain/get_block', { block_num_or_id: hash })
+        // EOS tx id is the result.transactions.trx.id
+        // EVM tx is in eos_block.transactions.trx.transaction.actions[n]
+        // There should be only one action in each eos transaction for those EVM transactions.
+        // We can filter the action by action.account === 'eosio.evm' and locate the rlptx of the EVM tx in action.data.rlptx
+        // EVM tx hash = keccak256(rlptx)
+        var txs = r.transactions.map((t) => {
+          if (t.trx.transaction != undefined) {
+            return t.trx.transaction.actions.map((e) => { e.txid = t.trx.id; return e });
+          }
+          else return [];
+        }).flat().filter(
+          (e) => e.account === 'eosio.evm' && e.data && e.data.rlptx && Web3.utils.keccak256("0x" + e.data.rlptx) === vm.transactionHash
+        )
+
+        // One EVM block will cover one second of time. So there will be two EOS blocks.
+        // If we cannot find the tx in the block located by the mixHash, try the previous one.
+        // It's in theory possible to have more than or less than two EOS blocks related to one EVM block,
+        // but for the frontend display, hardcoded two queries should be fine. 
+        // We can make the logic more general and more robust if necessary.
+        if (txs.length == 0) {
+          var r2 = await vm.rpc.fetch('/v1/chain/get_block', { block_num_or_id: r.previous })
+
+          txs = r2.transactions.map((t) => {
             if (t.trx.transaction != undefined) {
               return t.trx.transaction.actions.map((e) => { e.txid = t.trx.id; return e });
             }
             else return [];
           }).flat().filter(
-            (e) => e.account === 'eosio.evm' && e.data && e.data.rlptx && vm.web3.utils.keccak256("0x" + e.data.rlptx) === vm.transactionHash
+            (e) => e.account === 'eosio.evm' && e.data && e.data.rlptx && Web3.utils.keccak256("0x" + e.data.rlptx) === vm.transactionHash
           )
 
-          // One EVM block will cover one second of time. So there will be two EOS blocks.
-          // If we cannot find the tx in the block located by the mixHash, try the previous one.
-          // It's in theory possible to have more than or less than two EOS blocks related to one EVM block,
-          // but for the frontend display, hardcoded two queries should be fine. 
-          // We can make the logic more general and more robust if necessary.
-          if (txs.length == 0) {
-            var r2 = await vm.rpc.fetch('/v1/chain/get_block', { block_num_or_id: r.previous })
 
-            txs = r2.transactions.map((t) => {
-              if (t.trx.transaction != undefined) {
-                return t.trx.transaction.actions.map((e) => { e.txid = t.trx.id; return e });
-              }
-              else return [];
-            }).flat().filter(
-              (e) => e.account === 'eosio.evm' && e.data && e.data.rlptx && vm.web3.utils.keccak256("0x" + e.data.rlptx) === vm.transactionHash
-            )
-
-
-          }
-          // Should only found one though....
-          if (txs.length > 0) {
-            vm.eosHash = txs[0].txid
-          }
-          else {
-            vm.eosHash = "error"
-          }
-        })
+        }
+        // Should only found one though....
+        if (txs.length > 0) {
+          vm.eosHash = txs[0].txid
+        }
+        else {
+          vm.eosHash = "error"
+        }
 
         this.getBalance()
         this.targetAddress = ''
@@ -764,6 +700,6 @@ export default {
 }
 
 .error {
-  color:#fff;
+  color: #fff;
 }
 </style>

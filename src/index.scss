@@ -71,3 +71,11 @@ a.disabled {
 .dropdown-toggle-no-caret:after {
   display: none !important;
 }
+
+.modal-dialog {
+  z-index: inherit;
+}
+
+.modal.show{
+  display: block;
+}
