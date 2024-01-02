@@ -428,6 +428,39 @@ export default {
     async connectWallet() {
 
     },
+
+    displayValue(valueString, decimals) {
+      // Logic from web3.js
+      if (decimals <= 0) {
+        return valueString;
+      }
+      // pad the value with required zeros
+      // 13456789 -> 13456789, 1234 -> 001234
+      const zeroPaddedValue = valueString.padStart(decimals, '0');
+      // get the integer part of value by counting number of zeros from start
+      // 13456789 -> '13'
+      // 001234 -> ''
+      const integer = zeroPaddedValue.slice(0, -decimals);
+      // get the fraction part of value by counting number of zeros backward
+      // 13456789 -> '456789'
+      // 001234 -> '001234'
+      const fraction = zeroPaddedValue.slice(-decimals).replace(/\.?0+$/, '');
+
+      if (integer === '') {
+        if (fraction === '') {
+          return '0';
+        }
+        return `0.${fraction}`;
+      }
+
+      if (fraction === '') {
+        return integer;
+      }
+
+      return `${integer}.${fraction}`;
+
+    },
+
     async getBalance() {
 
       const address = this.address
@@ -445,7 +478,8 @@ export default {
       else {
         if ((this.erc20_contract())) {
           const wei = new BN((await this.erc20_contract().read.balanceOf([address])).toString())
-          this.balance = Web3.utils.fromWei(wei, 'mwei')
+          const decimals = await this.erc20_contract().read.decimals()
+          this.balance = this.displayValue(wei.toString(), decimals)
         }
         else { this.balance = null; }
       }
