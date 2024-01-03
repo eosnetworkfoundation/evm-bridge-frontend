@@ -260,6 +260,7 @@ export default {
       tokenList: null,
       selectedToken: 0,
       egressFee: '0',
+      decimals: null,
       tokenListTestnet: [
         { name: 'EOS', addr: '', logo: 'images/eos.png' },
         { name: 'JUNGLE', addr: '0x4ea3b729669bF6C34F7B80E5D6c17DB71F89F21F', logo: 'images/jungle.png', erc20_contract: null },
@@ -365,16 +366,12 @@ export default {
       return this.convertAddress(this.targetAddress)
     },
     transferValue() {
-      if (!this.amount) {
+      if (!this.amount || this.decimals === null) {
         return null
       }
       try {
-        if (this.tokenName() == "EOS") {
-          return Web3.utils.toBN(Web3.utils.toWei(this.amount.toString(), 'ether')).toString()
-        }
-        else {
-          return Web3.utils.toBN(Web3.utils.toWei(this.amount.toString(), 'mwei')).toString()
-        }
+        let parsed = this.parseInputValue(this.amount, this.decimals)
+        return parsed
       } catch (err) {
         return null
       }
@@ -397,6 +394,43 @@ export default {
 
     blockList() { return this.tokenList[this.selectedToken].blockList; },
     warningList() { return this.tokenList[this.selectedToken].warningList; },
+
+    parseInputValue(inputAmount, inputDeciamls) {
+      let amount = inputAmount.toString()
+      let extraExp = 0
+      if (amount.includes("e")) {
+        const s = amount.split('e');
+        amount = s[0]
+        extraExp = Number(s[1]);
+      }
+      
+      const denomination = BigInt(10) ** BigInt(inputDeciamls)
+      // From web3.js
+      // if value is decimal e.g. 24.56 extract `integer` and `fraction` part
+      // to avoid `fraction` to be null use `concat` with empty string
+      const [integer, fraction] = amount.split('.').concat('');
+
+      // join the value removing `.` from
+      // 24.56 -> 2456
+      const value = BigInt(`${integer}${fraction}`);
+      // multiply value with denomination
+      // 2456 * 1000000 -> 2456000000
+      const updatedValue = value * denomination;
+
+      let result = updatedValue.toString();
+      if (extraExp > 0) {
+        result = result.padEnd(result.length + extraExp, '0')
+      }
+      else if (extraExp < 0) {
+        result = result.slice(0, extraExp).padStart(1,"0")
+      }
+
+      if (fraction.length === 0) {
+        return result.toString();
+      }
+
+      return result.slice(0, -fraction.length).padStart(1,"0");
+    },
 
     async getPrice() {
 
@@ -472,16 +506,20 @@ export default {
           address,
           formatUnits: 'wei',
         })
+        this.decimals = 18
         const wei = new BN(bal.formatted)
         this.balance = Web3.utils.fromWei(wei, 'ether')
       }
       else {
         if ((this.erc20_contract())) {
           const wei = new BN((await this.erc20_contract().read.balanceOf([address])).toString())
-          const decimals = await this.erc20_contract().read.decimals()
-          this.balance = this.displayValue(wei.toString(), decimals)
+          this.decimals = await this.erc20_contract().read.decimals()
+          this.balance = this.displayValue(wei.toString(), this.decimals)
         }
-        else { this.balance = null; }
+        else { 
+          this.balance = null;
+          this.decimals = null; 
+        }
       }
 
     },
