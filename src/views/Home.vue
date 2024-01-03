@@ -161,7 +161,7 @@
               <p>{{ $t('home.eos2evmDesc.p2') }}</p>
               <p v-if="env === 'TESTNET'">{{ $t('home.eos2evmDesc.p3.testnet') }}</p>
               <p v-else>{{ $t('home.eos2evmDesc.p3.mainnet') }}</p>
-            <table class="table table-striped" style="max-width: 16em;">
+              <table class="table table-striped" style="max-width: 16em;">
                 <thead>
                   <tr>
                     <th>Token</th>
@@ -170,17 +170,18 @@
                 </thead>
                 <tbody>
                   <tr v-for="(item, index) in tokenList">
-                    <td>{{item.name}}</td>
-                    <td>{{item.ingressFee}} {{item.name}}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.ingressFee }} {{ item.name }}</td>
                   </tr>
                 </tbody>
               </table>
 
-              <div v-if="env === 'TESTNET'" v-html="$t('home.eos2evmDesc.p4.testnet', { 'interpolation': {'escapeValue': false} })"></div>
-              <div v-else v-html="$t('home.eos2evmDesc.p4.mainnet', { 'interpolation': {'escapeValue': false} })"></div>
-              <div ></div>
+              <div v-if="env === 'TESTNET'"
+                v-html="$t('home.eos2evmDesc.p4.testnet', { 'interpolation': { 'escapeValue': false } })"></div>
+              <div v-else v-html="$t('home.eos2evmDesc.p4.mainnet', { 'interpolation': { 'escapeValue': false } })"></div>
+              <div></div>
 
-              
+
             </div>
           </b-row>
         </b-card>
@@ -251,6 +252,7 @@ import { JsonRpc, RpcError } from 'enf-eosjs';
 
 import { getAccount, fetchBalance, getContract, fetchFeeData, sendTransaction, getPublicClient, getWalletClient, fetchTransaction, waitForTransaction, writeContract, disconnect, watchAccount, watchNetwork, switchNetwork, getNetwork } from '@wagmi/core'
 import { compileScript } from 'vue/compiler-sfc';
+import { numberToBytes } from 'viem';
 
 
 
@@ -274,7 +276,12 @@ export default {
       finished: false,
       transactionError: '',
       extraWarning: '',
-      tokenList: null,
+      tokenList: [{
+          name: 'EOS', addr: '', logo: 'images/eos.png',
+          blockList: ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos'],
+          warningList: ['huobideposit', 'okbtothemoon', 'gateiowallet', 'coinbasebase', 'krakenkraken'],
+          ingressFee: 0.01
+        }],
       selectedToken: 0,
       egressFee: '0',
       decimals: null,
@@ -334,28 +341,19 @@ export default {
       ],
     }
   },
-  created() {
+  async created() {
 
     this.rpc = (this.env === "TESTNET" ? new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch }) : new JsonRpc('https://eos.api.eosnation.io:443', { fetch }));
     // this.wallet.connect = this.connectWallet
 
+    await this.prepareTokenList()
 
-    this.tokenList = this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet;
-    this.selectedToken = 0;
+    
 
-    for (var item of this.tokenList) {
-      if (item.addr != '') {
-        item.erc20_contract = getContract({
-          address: item.addr,
-          abi: erc20_abi,
-        })
-      }
-    }
     const account = getAccount()
     watchAccount((account) => {
       this.address = account.address
       this.wallet.connected = account.isConnected;
-
 
       this.getBalance()
     })
@@ -420,7 +418,56 @@ export default {
     }
   },
   methods: {
+    async prepareTokenList() {
 
+      try {
+        const r = await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "tokens", "scope": "eosio.erc2o", "code": "eosio.erc2o", "json": true })
+        let vm = this
+        let fetchedList = r.rows.map(e => {
+          const s = e.ingress_fee.split(' ')
+          let blist = vm.env === "TESTNET" ? [] : ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon']
+          let wlist = []
+
+          if (s[1]==='USDT') {
+            blist = ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon']
+            wlist = ['gateiowallet']
+          }
+
+          return {
+            name: s[1],
+            addr: '0x' + e.address,
+            logo: 'images/' + s[1].toLowerCase() + '.png',
+            blockList: blist,
+            warningList: wlist,
+            ingressFee: Number(s[0])
+          }
+        })
+
+        fetchedList.unshift({
+          name: 'EOS', addr: '', logo: 'images/eos.png',
+          blockList: ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos'],
+          warningList: ['huobideposit', 'okbtothemoon', 'gateiowallet', 'coinbasebase', 'krakenkraken'],
+          ingressFee: 0.01
+        })
+
+        this.tokenList = fetchedList
+      }
+      catch (err) {
+        console.log(err)
+        this.tokenList = this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet;
+      }
+
+      this.selectedToken = 0;
+      for (var item of this.tokenList) {
+        if (item.addr != '') {
+          item.erc20_contract = getContract({
+            address: item.addr,
+            abi: erc20_abi,
+          })
+        }
+      }
+
+    },
     erc20_contract() { return this.tokenList[this.selectedToken].erc20_contract; },
     erc20_addr() { return this.tokenList[this.selectedToken].addr; },
     tokenName() { return this.tokenList[this.selectedToken].name; },
@@ -842,4 +889,5 @@ export default {
 
 .error {
   color: #fff;
-}</style>
+}
+</style>
