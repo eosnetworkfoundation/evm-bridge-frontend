@@ -43,13 +43,13 @@
                         <template #button-content>
                           <div class="my_dropdown-toggle">
                             <img :src="tokenList[selectedToken].logo"
-                              style="margin-right:5px; height:25px; width:25px;object-fit:contain;">
+                              style="margin-top:-4px; margin-right:5px; height:25px; width:25px;object-fit:contain;" onerror="this.src='images/placeholder.png'">
                             {{ tokenList[selectedToken].name }}
                           </div>
 
                         </template>
                         <b-dropdown-item v-for="(item, index) in tokenList" @click="onSelectToken(index)">
-                          <img :src="item.logo" style="margin-right:5px; height:25px; width:25px;object-fit:contain;">
+                          <img :src="item.logo" style="margin-top:-4px; margin-right:5px; height:25px; width:25px;object-fit:contain;" onerror="this.src='images/placeholder.png'">
                           {{ item.name }}
                         </b-dropdown-item>
                       </b-dropdown>
