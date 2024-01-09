@@ -274,73 +274,74 @@ export default {
       finished: false,
       transactionError: '',
       extraWarning: '',
-      tokenList: null,
+      tokenList: [{ name: 'EOS', addr: '', logo: 'images/eos.png', ingressFee: 0}],
       selectedToken: 0,
       egressFee: '0',
       decimals: null,
       tokenListTestnet: [
-        { name: 'EOS', addr: '', logo: 'images/eos.png', ingressFee: 0.01 },
-        { name: 'JUNGLE', addr: '0x4ea3b729669bF6C34F7B80E5D6c17DB71F89F21F', logo: 'images/jungle.png', erc20_contract: null, ingressFee: 0.01 },
+        { name: 'EOS', addr: '', logo: 'images/eos.png', ingressFee: 0},
+        { name: 'JUNGLE', addr: '0x4ea3b729669bF6C34F7B80E5D6c17DB71F89F21F', logo: 'images/jungle.png', erc20_contract: null, ingressFee: 0 },
       ],
       tokenListMainnet: [
         {
           name: 'EOS', addr: '', logo: 'images/eos.png',
           blockList: ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos'],
           warningList: ['huobideposit', 'okbtothemoon', 'gateiowallet', 'coinbasebase', 'krakenkraken'],
-          ingressFee: 0.01
+          ingressFee: 0
         },
         {
           name: 'USDT', addr: '0x33B57dC70014FD7AA6e1ed3080eeD2B619632B8e', logo: 'images/usdt.png',
           blockList: ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: ['gateiowallet'],
-          ingressFee: 0.01
+          ingressFee: 0
         },
         {
           name: 'ZEOS', addr: '0x477F09A0bDb273C8933429109fEBd3c3b0388B8A', logo: 'images/zeos.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
-          ingressFee: 20
+          ingressFee: 0
         },
         {
           name: 'BRAM', addr: '0x102F21abC12eBD194259C1081B13916192E7cBe5', logo: 'images/bram.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
-          ingressFee: 1000
+          ingressFee: 0
         },
         {
           name: 'SEOS', addr: '0xbfb10f85b889328e4a42507e31a07977ae00eec6', logo: 'images/seos.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
-          ingressFee: 0.1
+          ingressFee: 0
         },
         {
           name: 'BOX', addr: '0x9b3754f036de42846e60c8d8c89b18764f168367', logo: 'images/box.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
-          ingressFee: 0.1
+          ingressFee: 0
         },
         {
           name: 'USN', addr: '0x8d0258d6ccfb0ce394dc542c545566936b7974f9', logo: 'images/usn.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
-          ingressFee: 0.1
+          ingressFee: 0
         },
         {
           name: 'BANANA', addr: '0xC500C831AF8a5d1F4f3B1fc3940175A8db68C3CB', logo: 'images/banana.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
-          ingressFee: 20
+          ingressFee: 0
         },
       ],
     }
   },
-  created() {
+  async created() {
 
     this.rpc = (this.env === "TESTNET" ? new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch }) : new JsonRpc('https://eos.api.eosnation.io:443', { fetch }));
     // this.wallet.connect = this.connectWallet
 
+    this.tokenList = await this.refreshIngressFee(this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet);
+    console.log(this.tokenList)
 
-    this.tokenList = this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet;
     this.selectedToken = 0;
 
     for (var item of this.tokenList) {
@@ -427,6 +428,27 @@ export default {
 
     blockList() { return this.tokenList[this.selectedToken].blockList; },
     warningList() { return this.tokenList[this.selectedToken].warningList; },
+
+    async refreshIngressFee(tokenList) {
+      const erclist = (await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "tokens", "scope": "eosio.erc2o", "code": "eosio.erc2o", "json": true })).rows
+
+      await tokenList.forEach(async e=>{
+        if (e.name === "EOS") {
+          const r = await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "config", "scope": "eosio.evm", "code": "eosio.evm", "json": true })
+          e.ingressFee = Number(r.rows[0].ingress_bridge_fee.split(' ')[0])
+        }
+        else {
+          const addr = e.addr.substr(2).toLowerCase()
+          for(const erc of erclist) {
+            if (erc.address.toLowerCase() === addr) {
+              e.ingressFee = Number(erc.ingress_fee.split(' ')[0])
+              break
+            }
+          }
+        }
+      }) 
+      return tokenList
+    },
 
     parseInputValue(inputAmount, inputDeciamls) {
       let amount = inputAmount.toString()
