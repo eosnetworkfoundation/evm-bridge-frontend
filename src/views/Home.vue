@@ -108,11 +108,7 @@
           </div>
 
           <div class="mt-2 text-center small text-white">
-            {{ $t('home.gasFee') }}
-            <span v-if="tokenName() === 'EOS'">~0.0032 EOS</span>
-            <span v-else>~0.016 EOS</span>
             <span v-if="tokenName() != 'EOS'">
-              <br>
               {{ $t('home.bridgeFee') }} {{ egressFeeInEOS() }} EOS
             </span>
             <br>
