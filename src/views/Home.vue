@@ -73,8 +73,8 @@
                 <div class="mb-3">
                   <label for="address">{{ $t('home.destinationAccount') }}</label>
                   <div class="form-text mb-2">{{ $t('home.destinationAccountDesc') }}</div>
-                  <input type="text" id="address" class="form-control select" v-model="targetAddress"
-                    maxlength="13" list="addresses">
+                  <input type="text" id="address" class="form-control select" v-model="targetAddress" maxlength="13"
+                    list="addresses">
                   <div class="form-text font-monospace" v-if='extraWarning !== ""'>
                     <span style="color: red">{{ extraWarning }}</span>
                   </div>
@@ -108,11 +108,7 @@
           </div>
 
           <div class="mt-2 text-center small text-white">
-            {{ $t('home.gasFee') }}
-            <span v-if="tokenName() === 'EOS'">~0.0032 EOS</span>
-            <span v-else>~0.016 EOS</span>
             <span v-if="tokenName() != 'EOS'">
-              <br>
               {{ $t('home.bridgeFee') }} {{ egressFeeInEOS() }} EOS
             </span>
             <br>
@@ -161,6 +157,26 @@
               <p>{{ $t('home.eos2evmDesc.p2') }}</p>
               <p v-if="env === 'TESTNET'">{{ $t('home.eos2evmDesc.p3.testnet') }}</p>
               <p v-else>{{ $t('home.eos2evmDesc.p3.mainnet') }}</p>
+            <table class="table table-striped" style="max-width: 16em;">
+                <thead>
+                  <tr>
+                    <th>Token</th>
+                    <th>Ingress fee</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(item, index) in tokenList">
+                    <td>{{item.name}}</td>
+                    <td>{{item.ingressFee}} {{item.name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div v-if="env === 'TESTNET'" v-html="$t('home.eos2evmDesc.p4.testnet', { 'interpolation': {'escapeValue': false} })"></div>
+              <div v-else v-html="$t('home.eos2evmDesc.p4.mainnet', { 'interpolation': {'escapeValue': false} })"></div>
+              <div ></div>
+
+              
             </div>
           </b-row>
         </b-card>
@@ -213,9 +229,6 @@
         </div>
 
         <div class="mt-2 text-center small text-white">
-          {{ $t('home.bridgeFee') }}
-          <span>0.01 EOS</span>
-          <br>
           {{ $t('home.transferTime', ['~ 5 s']) }}
         </div>
       </b-tab>
@@ -257,44 +270,74 @@ export default {
       finished: false,
       transactionError: '',
       extraWarning: '',
-      tokenList: null,
+      tokenList: [{ name: 'EOS', addr: '', logo: 'images/eos.png', ingressFee: 0}],
       selectedToken: 0,
       egressFee: '0',
+      decimals: null,
       tokenListTestnet: [
-        { name: 'EOS', addr: '', logo: 'images/eos.png' },
-        { name: 'JUNGLE', addr: '0x4ea3b729669bF6C34F7B80E5D6c17DB71F89F21F', logo: 'images/jungle.png', erc20_contract: null },
+        { name: 'EOS', addr: '', logo: 'images/eos.png', ingressFee: 0},
+        { name: 'JUNGLE', addr: '0x4ea3b729669bF6C34F7B80E5D6c17DB71F89F21F', logo: 'images/jungle.png', erc20_contract: null, ingressFee: 0 },
       ],
       tokenListMainnet: [
-        { name: 'EOS', addr: '', logo: 'images/eos.png', 
-        blockList:  ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos'], 
-        warningList: ['huobideposit', 'okbtothemoon', 'gateiowallet', 'coinbasebase', 'krakenkraken'] 
-      },
-        { name: 'USDT', addr: '0x33B57dC70014FD7AA6e1ed3080eeD2B619632B8e', logo: 'images/usdt.png' , 
-        blockList:  ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'], 
-        warningList: ['gateiowallet'] 
-      },
-      { name: 'SEOS', addr: '0xbfb10f85b889328e4a42507e31a07977ae00eec6', logo: 'images/seos.png' , 
-        blockList:  ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'], 
-        warningList: [] 
-      },
-      { name: 'BOX', addr: '0x9b3754f036de42846e60c8d8c89b18764f168367', logo: 'images/box.png' , 
-        blockList:  ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'], 
-        warningList: [] 
-      },
-      { name: 'USN', addr: '0x8d0258d6ccfb0ce394dc542c545566936b7974f9', logo: 'images/usn.png' , 
-        blockList:  ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'], 
-        warningList: [] 
-      },
+        {
+          name: 'EOS', addr: '', logo: 'images/eos.png',
+          blockList: ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos'],
+          warningList: ['huobideposit', 'okbtothemoon', 'gateiowallet', 'coinbasebase', 'krakenkraken'],
+          ingressFee: 0
+        },
+        {
+          name: 'USDT', addr: '0x33B57dC70014FD7AA6e1ed3080eeD2B619632B8e', logo: 'images/usdt.png',
+          blockList: ['eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: ['gateiowallet'],
+          ingressFee: 0
+        },
+        {
+          name: 'ZEOS', addr: '0x477F09A0bDb273C8933429109fEBd3c3b0388B8A', logo: 'images/zeos.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'BRAM', addr: '0x102F21abC12eBD194259C1081B13916192E7cBe5', logo: 'images/bram.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'SEOS', addr: '0xbfb10f85b889328e4a42507e31a07977ae00eec6', logo: 'images/seos.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'BOX', addr: '0x9b3754f036de42846e60c8d8c89b18764f168367', logo: 'images/box.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'USN', addr: '0x8d0258d6ccfb0ce394dc542c545566936b7974f9', logo: 'images/usn.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'BANANA', addr: '0xC500C831AF8a5d1F4f3B1fc3940175A8db68C3CB', logo: 'images/banana.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
       ],
     }
   },
-  created() {
+  async created() {
 
     this.rpc = (this.env === "TESTNET" ? new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch }) : new JsonRpc('https://eos.api.eosnation.io:443', { fetch }));
     // this.wallet.connect = this.connectWallet
 
+    this.tokenList = await this.refreshIngressFee(this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet);
+    console.log(this.tokenList)
 
-    this.tokenList = this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet;
     this.selectedToken = 0;
 
     for (var item of this.tokenList) {
@@ -353,16 +396,12 @@ export default {
       return this.convertAddress(this.targetAddress)
     },
     transferValue() {
-      if (!this.amount) {
+      if (!this.amount || this.decimals === null) {
         return null
       }
       try {
-        if (this.tokenName() == "EOS") {
-          return Web3.utils.toBN(Web3.utils.toWei(this.amount.toString(), 'ether')).toString()
-        }
-        else {
-          return Web3.utils.toBN(Web3.utils.toWei(this.amount.toString(), 'mwei')).toString()
-        }
+        let parsed = this.parseInputValue(this.amount, this.decimals)
+        return parsed
       } catch (err) {
         return null
       }
@@ -385,6 +424,64 @@ export default {
 
     blockList() { return this.tokenList[this.selectedToken].blockList; },
     warningList() { return this.tokenList[this.selectedToken].warningList; },
+
+    async refreshIngressFee(tokenList) {
+      const erclist = (await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "tokens", "scope": "eosio.erc2o", "code": "eosio.erc2o", "json": true })).rows
+
+      await tokenList.forEach(async e=>{
+        if (e.name === "EOS") {
+          const r = await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "config", "scope": "eosio.evm", "code": "eosio.evm", "json": true })
+          e.ingressFee = Number(r.rows[0].ingress_bridge_fee.split(' ')[0])
+        }
+        else {
+          const addr = e.addr.substr(2).toLowerCase()
+          for(const erc of erclist) {
+            if (erc.address.toLowerCase() === addr) {
+              e.ingressFee = Number(erc.ingress_fee.split(' ')[0])
+              break
+            }
+          }
+        }
+      }) 
+      return tokenList
+    },
+
+    parseInputValue(inputAmount, inputDeciamls) {
+      let amount = inputAmount.toString()
+      let extraExp = 0
+      if (amount.includes("e")) {
+        const s = amount.split('e');
+        amount = s[0]
+        extraExp = Number(s[1]);
+      }
+
+      const denomination = BigInt(10) ** BigInt(inputDeciamls)
+      // From web3.js
+      // if value is decimal e.g. 24.56 extract `integer` and `fraction` part
+      // to avoid `fraction` to be null use `concat` with empty string
+      const [integer, fraction] = amount.split('.').concat('');
+
+      // join the value removing `.` from
+      // 24.56 -> 2456
+      const value = BigInt(`${integer}${fraction}`);
+      // multiply value with denomination
+      // 2456 * 1000000 -> 2456000000
+      const updatedValue = value * denomination;
+
+      let result = updatedValue.toString();
+      if (extraExp > 0) {
+        result = result.padEnd(result.length + extraExp, '0')
+      }
+      else if (extraExp < 0) {
+        result = result.slice(0, extraExp).padStart(1, "0")
+      }
+
+      if (fraction.length === 0) {
+        return result.toString();
+      }
+
+      return result.slice(0, -fraction.length).padStart(1, "0");
+    },
 
     async getPrice() {
 
@@ -416,6 +513,39 @@ export default {
     async connectWallet() {
 
     },
+
+    displayValue(valueString, decimals) {
+      // Logic from web3.js
+      if (decimals <= 0) {
+        return valueString;
+      }
+      // pad the value with required zeros
+      // 13456789 -> 13456789, 1234 -> 001234
+      const zeroPaddedValue = valueString.padStart(decimals, '0');
+      // get the integer part of value by counting number of zeros from start
+      // 13456789 -> '13'
+      // 001234 -> ''
+      const integer = zeroPaddedValue.slice(0, -decimals);
+      // get the fraction part of value by counting number of zeros backward
+      // 13456789 -> '456789'
+      // 001234 -> '001234'
+      const fraction = zeroPaddedValue.slice(-decimals).replace(/\.?0+$/, '');
+
+      if (integer === '') {
+        if (fraction === '') {
+          return '0';
+        }
+        return `0.${fraction}`;
+      }
+
+      if (fraction === '') {
+        return integer;
+      }
+
+      return `${integer}.${fraction}`;
+
+    },
+
     async getBalance() {
 
       const address = this.address
@@ -427,15 +557,20 @@ export default {
           address,
           formatUnits: 'wei',
         })
+        this.decimals = 18
         const wei = new BN(bal.formatted)
         this.balance = Web3.utils.fromWei(wei, 'ether')
       }
       else {
         if ((this.erc20_contract())) {
           const wei = new BN((await this.erc20_contract().read.balanceOf([address])).toString())
-          this.balance = Web3.utils.fromWei(wei, 'mwei')
+          this.decimals = await this.erc20_contract().read.decimals()
+          this.balance = this.displayValue(wei.toString(), this.decimals)
         }
-        else { this.balance = null; }
+        else {
+          this.balance = null;
+          this.decimals = null;
+        }
       }
 
     },
@@ -448,7 +583,7 @@ export default {
       else {
         this.egressFee = '0'
       }
-      
+
       this.getBalance()
     },
 
@@ -484,7 +619,7 @@ export default {
         var vm = this
 
         let tx = null;
-        
+
         await this.getPrice()
 
         if (this.tokenName() === 'EOS') {
@@ -725,5 +860,4 @@ export default {
 
 .error {
   color: #fff;
-}
-</style>
+}</style>
