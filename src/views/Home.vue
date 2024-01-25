@@ -48,8 +48,8 @@
                           </div>
 
                         </template>
-                        <b-dropdown-item v-for="(item, index) in tokenList" @click="onSelectToken(index)" :disabled="item.name != 'EOS' && !item.addr">
-                          <img :style="{opacity:(item.name != 'EOS' && !item.addr)?0.5:1}" :src="item.logo" class="dropdown-symbol">
+                        <b-dropdown-item v-for="(item, index) in tokenList" @click="onSelectToken(index)" :disabled="!item.enabled">
+                          <img :style="{opacity:item.enabled?1:0.5}" :src="item.logo" class="dropdown-symbol">
                           {{ item.name }}
                         </b-dropdown-item>
                       </b-dropdown>
@@ -167,7 +167,7 @@
                 <tbody>
                   <tr v-for="(item, index) in tokenList">
                     <td>{{item.name}}</td>
-                    <td v-if="item.name === 'EOS' || item.addr">{{item.ingressFee}} {{item.name}}</td>
+                    <td v-if="item.enabled">{{item.ingressFee}} {{item.name}}</td>
                     <td v-else>-</td>
                   </tr>
                 </tbody>
