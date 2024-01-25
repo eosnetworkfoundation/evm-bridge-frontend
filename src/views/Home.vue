@@ -43,13 +43,13 @@
                         <template #button-content>
                           <div class="my_dropdown-toggle">
                             <img :src="tokenList[selectedToken].logo"
-                              style="margin-right:5px; height:25px; width:25px;object-fit:contain;">
+                              class="dropdown-symbol">
                             {{ tokenList[selectedToken].name }}
                           </div>
 
                         </template>
-                        <b-dropdown-item v-for="(item, index) in tokenList" @click="onSelectToken(index)">
-                          <img :src="item.logo" style="margin-right:5px; height:25px; width:25px;object-fit:contain;">
+                        <b-dropdown-item v-for="(item, index) in tokenList" @click="onSelectToken(index)" :disabled="item.name != 'EOS' && !item.addr">
+                          <img :style="{opacity:(item.name != 'EOS' && !item.addr)?0.5:1}" :src="item.logo" class="dropdown-symbol">
                           {{ item.name }}
                         </b-dropdown-item>
                       </b-dropdown>
@@ -167,7 +167,8 @@
                 <tbody>
                   <tr v-for="(item, index) in tokenList">
                     <td>{{item.name}}</td>
-                    <td>{{item.ingressFee}} {{item.name}}</td>
+                    <td v-if="item.name === 'EOS' || item.addr">{{item.ingressFee}} {{item.name}}</td>
+                    <td v-else>-</td>
                   </tr>
                 </tbody>
               </table>
@@ -292,6 +293,18 @@ export default {
           ingressFee: 0
         },
         {
+          name: 'MLNK', addr: '0x47c727d53ebe90317144917f66a588dd45d4b114', logo: 'images/mlnk.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'CHEX', addr: '0xde90b6ad3b8c81f38af250d56dfd4bf256b87512', logo: 'images/chex.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
           name: 'ZEOS', addr: '0x477F09A0bDb273C8933429109fEBd3c3b0388B8A', logo: 'images/zeos.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
@@ -335,7 +348,7 @@ export default {
     this.rpc = (this.env === "TESTNET" ? new JsonRpc('https://jungle4.api.eosnation.io:443', { fetch }) : new JsonRpc('https://eos.api.eosnation.io:443', { fetch }));
     // this.wallet.connect = this.connectWallet
 
-    this.tokenList = await this.refreshIngressFee(this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet);
+    this.tokenList = await this.prepareList(this.env === "TESTNET" ? this.tokenListTestnet : this.tokenListMainnet);
     console.log(this.tokenList)
 
     this.selectedToken = 0;
@@ -425,24 +438,41 @@ export default {
     blockList() { return this.tokenList[this.selectedToken].blockList; },
     warningList() { return this.tokenList[this.selectedToken].warningList; },
 
-    async refreshIngressFee(tokenList) {
+    async prepareList(tokenListTemplate) {
+      // Make a deep clone
+      let tokenList = JSON.parse(JSON.stringify(tokenListTemplate))
+      console.log(tokenListTemplate)
+      console.log(tokenList)
       const erclist = (await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "tokens", "scope": "eosio.erc2o", "code": "eosio.erc2o", "json": true })).rows
+      for(let erc of erclist) {
+        let fee = erc.ingress_fee.split(' ')
 
-      await tokenList.forEach(async e=>{
+        erc.ingressFee = Number(fee[0])
+        erc.symbol = fee[1]
+        erc.checksumAddr = Web3.utils.toChecksumAddress("0x"+erc.address.toLowerCase())
+      }
+
+      for (let index = 0; index < tokenList.length; index++) {
+        let e = tokenList[index]
         if (e.name === "EOS") {
           const r = await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "config", "scope": "eosio.evm", "code": "eosio.evm", "json": true })
           e.ingressFee = Number(r.rows[0].ingress_bridge_fee.split(' ')[0])
+          e.enabled = true
         }
         else {
-          const addr = e.addr.substr(2).toLowerCase()
+          e.enabled = false
           for(const erc of erclist) {
-            if (erc.address.toLowerCase() === addr) {
-              e.ingressFee = Number(erc.ingress_fee.split(' ')[0])
+            if (erc.symbol.toLowerCase() === e.name.toLowerCase()) {
+              e.ingressFee = erc.ingressFee
+              e.addr = erc.checksumAddr
+              e.enabled = true
               break
             }
           }
         }
-      }) 
+      }
+       
+      tokenList.sort((a,b)=> b.enabled - a.enabled)
       return tokenList
     },
 
@@ -772,6 +802,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.dropdown-symbol {
+  margin-right:5px;
+  height:25px;
+  width:25px;
+  object-fit:contain;
+}
+
 .transfer-btn {
   margin: auto;
   width: 170px;
