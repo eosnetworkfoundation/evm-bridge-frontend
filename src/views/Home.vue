@@ -340,6 +340,18 @@ export default {
           warningList: [],
           ingressFee: 0
         },
+        {
+          name: 'SFNS', addr: '', logo: 'images/sfns.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'SFN', addr: '', logo: 'images/sfn.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
       ],
     }
   },
