@@ -340,6 +340,18 @@ export default {
           warningList: [],
           ingressFee: 0
         },
+        {
+          name: 'SFNS', addr: '0x6d43320bBD27ac8e61CE9dE6c092b182aF03ED6a', logo: 'images/sfns.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'SFN', addr: '0x93496551b8a5E1a889777B60b996aB7231852D74', logo: 'images/sfn.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
       ],
     }
   },
@@ -441,9 +453,8 @@ export default {
     async prepareList(tokenListTemplate) {
       // Make a deep clone
       let tokenList = JSON.parse(JSON.stringify(tokenListTemplate))
-      console.log(tokenListTemplate)
-      console.log(tokenList)
-      const erclist = (await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "tokens", "scope": "eosio.erc2o", "code": "eosio.erc2o", "json": true })).rows
+
+      const erclist = (await this.rpc.fetch('/v1/chain/get_table_rows', { "table": "tokens", "scope": "eosio.erc2o", "code": "eosio.erc2o", "json": true, "limit": 20 })).rows
       for(let erc of erclist) {
         let fee = erc.ingress_fee.split(' ')
 
