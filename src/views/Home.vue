@@ -293,24 +293,6 @@ export default {
           ingressFee: 0
         },
         {
-          name: 'MLNK', addr: '0x47c727d53ebe90317144917f66a588dd45d4b114', logo: 'images/mlnk.png',
-          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
-          warningList: [],
-          ingressFee: 0
-        },
-        {
-          name: 'CHEX', addr: '0xde90b6ad3b8c81f38af250d56dfd4bf256b87512', logo: 'images/chex.png',
-          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
-          warningList: [],
-          ingressFee: 0
-        },
-        {
-          name: 'ZEOS', addr: '0x477F09A0bDb273C8933429109fEBd3c3b0388B8A', logo: 'images/zeos.png',
-          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
-          warningList: [],
-          ingressFee: 0
-        },
-        {
           name: 'BRAM', addr: '0x102F21abC12eBD194259C1081B13916192E7cBe5', logo: 'images/bram.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
@@ -318,6 +300,24 @@ export default {
         },
         {
           name: 'SEOS', addr: '0xbfb10f85b889328e4a42507e31a07977ae00eec6', logo: 'images/seos.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'PINK', addr: '', logo: 'images/pink.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'MLNK', addr: '0x47c727d53ebe90317144917f66a588dd45d4b114', logo: 'images/mlnk.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'CHEX', addr: '0xde90b6ad3b8c81f38af250d56dfd4bf256b87512', logo: 'images/chex.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
           ingressFee: 0
@@ -336,6 +336,12 @@ export default {
         },
         {
           name: 'BANANA', addr: '0xC500C831AF8a5d1F4f3B1fc3940175A8db68C3CB', logo: 'images/banana.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
+          name: 'ZEOS', addr: '0x477F09A0bDb273C8933429109fEBd3c3b0388B8A', logo: 'images/zeos.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
           ingressFee: 0
