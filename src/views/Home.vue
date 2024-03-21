@@ -305,7 +305,7 @@ export default {
           ingressFee: 0
         },
         {
-          name: 'PINK', addr: '', logo: 'images/pink.png',
+          name: 'PINK', addr: '0x7cb1dcdb506d7b6843e89631a4d830eda1b82fc6', logo: 'images/pink.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
           ingressFee: 0
