@@ -311,6 +311,12 @@ export default {
           ingressFee: 0
         },
         {
+          name: 'PKDAO', addr: '0x70505c987a5722a2207dabb3d3b17ec020d7d6d2', logo: 'images/pkdao.png',
+          blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
+          warningList: [],
+          ingressFee: 0
+        },
+        {
           name: 'MLNK', addr: '0x47c727d53ebe90317144917f66a588dd45d4b114', logo: 'images/mlnk.png',
           blockList: ['gateiowallet', 'eosbndeposit', 'bybitdeposit', 'bitgeteosdep', 'kucoindoteos', 'binancecleos', 'coinbasebase', 'krakenkraken', 'huobideposit', 'okbtothemoon'],
           warningList: [],
